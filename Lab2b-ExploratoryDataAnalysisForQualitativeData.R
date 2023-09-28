@@ -25,19 +25,19 @@
 #   Summary: https://rstudio.github.io/renv/
 #   More detailed article: https://rstudio.github.io/renv/articles/renv.html
 
-# "renv" It can be installed as follows:
-# if (!is.element("renv", installed.packages()[, 1])) {
-# install.packages("renv", dependencies = TRUE,
+#renv It can be installed as follows:
+if (!is.element("renv", installed.packages()[, 1])) {
+install.packages("renv", dependencies = TRUE,
 repos = "https://cloud.r-project.org") # nolint
-# }
-# require("renv") # nolint
+}
+require(renv) # nolint
 
 # Once installed, you can then use renv::init() to initialize renv in a new
 # project.
 
 # The prompt received after executing renv::init() is as shown below:
 # This project already has a lockfile. What would you like to do?
-
+renv::init()
 # 1: Restore the project from the lockfile.
 # 2: Discard the lockfile and re-initialize the project.
 # 3: Activate the project without snapshotting or installing any packages.
@@ -86,7 +86,7 @@ lapply(.libPaths(), list.files)
 # [OPTIONAL]
 # Execute the following code to reinstall the specific package versions
 # recorded in the lockfile (restart R after executing the command):
-# renv::restore() # nolint
+renv::restore() # nolint
 
 # [OPTIONAL]
 # If you get several errors setting up renv and you prefer not to use it, then
@@ -654,6 +654,8 @@ write.csv(evaluation_likes_and_wishes,
 #       word stem, base or root form
 #  (iii) Word replacement: replace words with more frequently used synonyms
 
+#  Missing Lines of code.
+
 ## Tokenization ----
 # The goal of text mining is to discover relevant information that is possibly
 # unknown or hidden. Natural Language Processing (NLP) is one methodology used
@@ -688,7 +690,7 @@ write.csv(evaluation_likes_and_wishes,
 # carry significant meaning on their own.
 # Examples of stopwords in English include:
 # "the," "and," "is," "in," "it," "of," "to," "for," and "with."
-
+#View(stop_words)
 # Additional examples can be seen here:
 head(sample(stop_words$word, 20), 20)
 
