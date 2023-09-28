@@ -1,7 +1,7 @@
 ---
 title: "Business Intelligence Lab Submission Markdown"
-author: "<Specify your group name here>"
-date: "<Specify the date when you submitted the lab>"
+author: "Champions"
+date: "29/9/2023"
 output:
   github_document: 
     toc: yes
@@ -11,33 +11,20 @@ output:
     df_print: default
 editor_options:
   chunk_output_type: console
+  markdown: 
+    wrap: 72
 ---
 
 # Student Details
 
-+---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Student ID Numbers and Names of Group Members** | *\<list one student name, class group (just the letter; A, B, or C), and ID per line, e.g., 123456 - A - John Leposo; you should be between 2 and 5 members per group\>* |
-|                                                   |                                                                                                                                                                          |
-|                                                   | 1.  ID - Class Group - Name                                                                                                                                              |
-|                                                   |                                                                                                                                                                          |
-|                                                   | 2.  ID - Class Group - Name                                                                                                                                              |
-|                                                   |                                                                                                                                                                          |
-|                                                   | 3.  ID - Class Group - Name                                                                                                                                              |
-|                                                   |                                                                                                                                                                          |
-|                                                   | 4.  ID - Class Group - Name                                                                                                                                              |
-|                                                   |                                                                                                                                                                          |
-|                                                   | 5.  ID - Class Group - Name                                                                                                                                              |
-+---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **GitHub Classroom Group Name**                   | *\<specify the name of the team you created on GitHub classroom\>*                                                                                                       |
-+---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Course Code**                                   | BBT4206                                                                                                                                                                  |
-+---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Course Name**                                   | Business Intelligence II                                                                                                                                                 |
-+---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Program**                                       | Bachelor of Business Information Technology                                                                                                                              |
-+---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Semester Duration**                             | 21^st^ August 2023 to 28^th^ November 2023                                                                                                                               |
-+---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                                                   |                                                                                                                                                                                    |              |
+|---------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
+| **Student ID Numbers and Names of Group Members** | \| \| 1. 126761 -B -Virginia Wanjiru \| \| 2. 127707 -B-Clarice Muthoni \| \| 3. 135859 -B -Pauline Wang'ombe \| \| 4. 133996 -B- Trevor Ngugi \| \| 5. 134111 -B- Immaculate Juma |              |
+|                                                   | **GitHub Classroom Group Name**                                                                                                                                                    | Champions \| |
+| **Course Code**                                   | BBT4206                                                                                                                                                                            |              |
+| **Course Name**                                   | Business Intelligence II                                                                                                                                                           |              |
+| **Program**                                       | Bachelor of Business Information Technology                                                                                                                                        |              |
+| **Semester Duration**                             | 21^st^ August 2023 to 28^th^ November 2023                                                                                                                                         |              |
 
 # Setup Chunk
 
@@ -62,10 +49,13 @@ require("readr")
 
 ------------------------------------------------------------------------
 
-**Note:** the following "*KnitR*" options have been set as the defaults in this markdown:\
+**Note:** the following "*KnitR*" options have been set as the defaults
+in this markdown:\
 `knitr::opts_chunk$set(echo = TRUE, warning = FALSE, eval = TRUE, collapse = FALSE, tidy.opts = list(width.cutoff = 80), tidy = TRUE)`.
 
-More KnitR options are documented here <https://bookdown.org/yihui/rmarkdown-cookbook/chunk-options.html> and here <https://yihui.org/knitr/options/>.
+More KnitR options are documented here
+<https://bookdown.org/yihui/rmarkdown-cookbook/chunk-options.html> and
+here <https://yihui.org/knitr/options/>.
 
 ```{r setup, echo=TRUE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(
@@ -79,7 +69,8 @@ knitr::opts_chunk$set(
 
 ------------------------------------------------------------------------
 
-**Note:** the following "*R Markdown*" options have been set as the defaults in this markdown:
+**Note:** the following "*R Markdown*" options have been set as the
+defaults in this markdown:
 
 > output:\
 > \
@@ -95,7 +86,9 @@ knitr::opts_chunk$set(
 
 # Loading the Student Performance Dataset
 
-The 20230412-20230719-BI1-BBIT4-1-StudentPerformanceDataset is then loaded. The dataset and its metadata are available here: <https://drive.google.com/drive/folders/1-BGEhfOwquXF6KKXwcvrx7WuZXuqmW9q?usp=sharing>
+The 20230412-20230719-BI1-BBIT4-1-StudentPerformanceDataset is then
+loaded. The dataset and its metadata are available here:
+<https://drive.google.com/drive/folders/1-BGEhfOwquXF6KKXwcvrx7WuZXuqmW9q?usp=sharing>
 
 ```{r Load Dataset}
 student_performance_dataset <-
@@ -236,27 +229,49 @@ student_performance_dataset <-
 
 ## Description of the Dataset
 
-We then display the number of observations and number of variables. We have 101 observations and 100 variables to work with.
+We then display the number of observations and number of variables. We
+have 101 observations and 100 variables to work with.
 
 ```{r Your Fourth Code Chunk}
 dim(student_performance_dataset)
 ```
 
-Next, we display the quartiles for each numeric variable[*... think of this process as **"storytelling using the data."** Tell us what is happening; tell us what you are discovering as you proceed with the markdown; walk us through your code step-by-step (a code walkthrough).*]{#highlight style="color: blue"}
+Next, we display the quartiles for each numeric variable[*... think of
+this process as **"storytelling using the data."** Tell us what is
+happening; tell us what you are discovering as you proceed with the
+markdown; walk us through your code step-by-step (a code
+walkthrough).*]{#highlight style="color: blue"}
 
 ```{r Your Fifth Code Chunk}
 summary(student_performance_dataset)
 ```
 
-# \<You can Provide Another Appropriate Title Here if you wish\>
+# Visualizations
 
-Describe the code chunk here.
+## Decorated visual bar chart
+
+These lines of code below set up a bar plot using ggplot2 to visualize
+average course evaluation ratings for different class groups and
+genders. The bars are grouped by class group, and each bar represents
+the average rating for a specific gender within each class group. The
+plot is customized with colors and labels for clarity. The pipe operator
+has also been used chain together a series of data manipulation or
+visualization operations.
 
 ```{r Your Sixth Code Chunk}
-# Fill this with R related code that will be executed when the R markdown file
+evaluation_per_group_per_gender %>%
+  ggplot() +
+  geom_bar(aes(x = class_group, y = average_evaluation_rating,
+               fill = `Student's Gender`),
+           stat = "identity", position = "dodge") +
+  expand_limits(y = 0) +
+  blue_grey_theme() +
+  scale_fill_manual(values = blue_grey_colours_2) +
+  ggtitle("Course Evaluation Rating per Group and per Gender") +
+  labs(x = "Class Group", y = "Average Rating")
 ```
 
-## \<You Can Have a Sub-Title Here if you wish\>
+## Stemming/Lemmatization ----
 
 Describe the code chunk here.
 
@@ -264,12 +279,201 @@ Describe the code chunk here.
 # Fill this with other R related code that will be executed when the R markdown
 ```
 
-## \<You Can Have Another Sub-Title Here if you wish\>
+## Top 10 words per gender for Evaluation Likes
 
-Describe the code chunk here.
+These lines of code prepare and create a horizontal bar plot that
+visualizes the top 10 most frequently used words in course evaluation
+"likes" for each gender category, with each word's frequency represented
+by the height of the bars. The plot is customized with labels, colors,
+and facets for clarity and interpretation.
 
 ```{r Your Eighth Code Chunk}
-# Fill this with other R related code that will be executed when the R markdown
+popular_words <- evaluation_likes_filtered %>%
+  group_by(`Student's Gender`) %>%
+  count(`Likes (tokenized)`, `Student's Gender`, sort = TRUE) %>%
+  slice(seq_len(10)) %>%
+  ungroup() %>%
+  arrange(`Student's Gender`, n) %>%
+  mutate(row = row_number())
+
+popular_words %>%
+  ggplot(aes(row, n, fill = `Student's Gender`)) +
+  geom_col(fill = blue_grey_colours_1) +
+  blue_grey_theme() +
+  labs(x = "Word in Course Evaluation",
+       y = "Number of Times Used (Term Frequency)") +
+  ggtitle("Most Frequently Used Words in Course Evaluation Likes per Gender") +
+  facet_wrap(~`Student's Gender`, scales = "free") +
+  scale_x_continuous(
+                     breaks = popular_words$row,
+                     labels = popular_words$`Likes (tokenized)`) +
+  coord_flip()
 ```
 
-**etc.** as per the lab submission requirements. Be neat and communicate in a clear and logical manner.
+## Top 10 words per gender for Evaluation Wishes
+
+These lines of code prepare and create a horizontal bar plot that
+visualizes the top 10 most frequently used words in course evaluation
+"wishes" for each gender category, with each word's frequency
+represented by the length of the bars. The plot is customized with
+labels, colors, and facets for clarity and interpretation.
+
+```{r Your Nineth Code Chunk}
+popular_words <- evaluation_wishes_filtered %>%
+  group_by(`Student's Gender`) %>%
+  count(`Wishes (tokenized)`, `Student's Gender`, sort = TRUE) %>%
+  slice(seq_len(10)) %>%
+  ungroup() %>%
+  arrange(`Student's Gender`, n) %>%
+  mutate(row = row_number())
+
+popular_words %>%
+  ggplot(aes(row, n, fill = `Student's Gender`)) +
+  geom_col(fill = blue_grey_colours_1) +
+  blue_grey_theme() +
+  labs(x = "Word in Course Evaluation", y = "Number of Times Used") +
+  ggtitle("Most Frequently Used Words in Course Evaluation Wishes per Gender") +
+  facet_wrap(~`Student's Gender`, scales = "free") +
+  scale_x_continuous(
+                     breaks = popular_words$row,
+                     labels = popular_words$`Wishes (tokenized)`) +
+  coord_flip()
+```
+
+## Word Cloud
+
+A word cloud is a visual representation of text data where the size of
+each word is proportional to its frequency in the input text.
+
+Words that occur more frequently will be displayed as larger and more
+prominent in the word cloud, making it a quick way to identify the most
+common terms or words in a dataset.
+
+### Word Cloud for Evaluation Likes
+
+In this code, the word cloud is generated specifically for the "Likes"
+section of course evaluations, allowing you to visually explore the most
+frequently mentioned positive aspects or comments in these evaluations.
+
+```{r your Tenth Code Chunk}
+evaluation_likes_filtered_cloud <- evaluation_likes_filtered %>% # nolint
+  count(`Likes (tokenized)`, sort = TRUE)
+
+wordcloud2(evaluation_likes_filtered_cloud, size = .5)
+```
+
+### Word Cloud for Evaluation Wishes
+
+In this code, the word cloud is generated specifically for the "Wishes"
+section of course evaluations, allowing you to visually explore the most
+frequently mentioned desires, suggestions, or requests from the
+evaluations.
+
+```{r Your Eleventh Code Chunk}
+evaluation_wishes_filtered_cloud <- evaluation_wishes_filtered %>% # nolint
+  count(`Wishes (tokenized)`, sort = TRUE)
+
+wordcloud2(evaluation_wishes_filtered_cloud, size = .5)
+```
+
+## Term Frequency - Inverse Document Frequency (TF-IDF)
+
+It is a technique that quantifies the significance of a term or word in
+a document by considering both its frequency within the document (Term
+Frequency, TF) and its rarity across the entire corpus (Inverse Document
+Frequency, IDF).
+
+### TF-IDF Score per Group of Evaluation Likes
+
+This code focuses on analyzing and visualizing the most important words
+or terms in the "Likes" section of course evaluations, again using Term
+Frequency-Inverse Document Frequency (TF-IDF) methodology.
+
+```{r Your Twelfth Code Chunk}
+popular_tfidf_words_likes <- evaluation_likes_filtered %>% # nolint
+  unnest_tokens(word, `Likes (tokenized)`) %>%
+  distinct() %>%
+  filter(!word %in% undesirable_words) %>%
+  filter(nchar(word) > 3) %>%
+  rename(`Likes (tokenized)` = word) %>%
+  select(`Class Group`, `Student's Gender`,
+         `Average Course Evaluation Rating`, `Likes (tokenized)`) %>%
+  count(`Class Group`, `Likes (tokenized)`, sort = TRUE) %>%
+  ungroup() %>%
+  bind_tf_idf(`Likes (tokenized)`, `Class Group`, n)
+
+head(popular_tfidf_words_likes)
+
+top_popular_tfidf_words <- popular_tfidf_words_likes %>%
+  arrange(desc(tf_idf)) %>%
+  mutate(`Likes (tokenized)` =
+           factor(`Likes (tokenized)`,
+                  levels = rev(unique(`Likes (tokenized)`)))) %>%
+  group_by(`Class Group`) %>%
+  slice(seq_len(10)) %>%
+  ungroup() %>%
+  arrange(`Class Group`, tf_idf) %>%
+  mutate(row = row_number())
+
+top_popular_tfidf_words %>%
+  ggplot(aes(x = row, tf_idf, fill = `Class Group`)) +
+  geom_col(fill = blue_grey_colours_1) +
+  blue_grey_theme() +
+  labs(x = "Word in Course Evaluation", y = "TF-IDF Score") +
+  ggtitle("Important Words using TF-IDF by Chart Level") +
+  ggtitle("Most Important Words by TF-IDF Score in Course Evaluation Likes per 
+      Class Group") +
+  facet_wrap(~`Class Group`, scales = "free") +
+  scale_x_continuous(
+                     breaks = top_popular_tfidf_words$row,
+                     labels = top_popular_tfidf_words$`Likes (tokenized)`) +
+  coord_flip()
+```
+
+### TF-IDF Score per Group of Evaluation Wishes
+
+This code processes text data, calculates TF-IDF scores, and visualizes
+the top TF-IDF words within each Class Group using a faceted bar plot.
+This helps identify the most important words associated with course
+evaluation "Wishes" for different class groups.
+
+```{r}
+popular_tfidf_words_likes <- evaluation_wishes_filtered %>% # nolint
+  unnest_tokens(word, `Wishes (tokenized)`) %>%
+  distinct() %>%
+  filter(!word %in% undesirable_words) %>%
+  filter(nchar(word) > 3) %>%
+  rename(`Wishes (tokenized)` = word) %>%
+  select(`Class Group`, `Student's Gender`,
+         `Average Course Evaluation Rating`, `Wishes (tokenized)`) %>%
+  count(`Class Group`, `Wishes (tokenized)`, sort = TRUE) %>%
+  ungroup() %>%
+  bind_tf_idf(`Wishes (tokenized)`, `Class Group`, n)
+
+head(popular_tfidf_words_likes)
+
+top_popular_tfidf_words <- popular_tfidf_words_likes %>%
+  arrange(desc(tf_idf)) %>%
+  mutate(`Wishes (tokenized)` =
+           factor(`Wishes (tokenized)`,
+                  levels = rev(unique(`Wishes (tokenized)`)))) %>%
+  group_by(`Class Group`) %>%
+  slice(seq_len(10)) %>%
+  ungroup() %>%
+  arrange(`Class Group`, tf_idf) %>%
+  mutate(row = row_number())
+
+top_popular_tfidf_words %>%
+  ggplot(aes(x = row, tf_idf, fill = `Class Group`)) +
+  geom_col(fill = blue_grey_colours_1) +
+  blue_grey_theme() +
+  labs(x = "Word in Course Evaluation", y = "TF-IDF Score") +
+  ggtitle("Important Words using TF-IDF by Chart Level") +
+  ggtitle("Most Important Words by TF-IDF Score in Course Evaluation Wishes per 
+      Class Group") +
+  facet_wrap(~`Class Group`, scales = "free") +
+  scale_x_continuous(
+                     breaks = top_popular_tfidf_words$row,
+                     labels = top_popular_tfidf_words$`Wishes (tokenized)`) +
+  coord_flip()
+```
