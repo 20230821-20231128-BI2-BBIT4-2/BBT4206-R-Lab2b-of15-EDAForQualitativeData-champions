@@ -25,12 +25,12 @@
 #   Summary: https://rstudio.github.io/renv/
 #   More detailed article: https://rstudio.github.io/renv/articles/renv.html
 
-# "renv" It can be installed as follows:
-# if (!is.element("renv", installed.packages()[, 1])) {
-# install.packages("renv", dependencies = TRUE,
-repos = "https://cloud.r-project.org") # nolint
-# }
-# require("renv") # nolint
+#"renv" It can be installed as follows:
+ if (!is.element("renv", installed.packages()[, 1])) {
+ install.packages("renv", dependencies = TRUE,
+ repos = "https://cloud.r-project.org") # nolint
+ }
+ require("renv") # nolint
 
 # Once installed, you can then use renv::init() to initialize renv in a new
 # project.
@@ -503,7 +503,7 @@ summary(student_performance_dataset)
 evaluation_per_group_per_gender <- student_performance_dataset %>% # nolint
   mutate(`Student's Gender` =
            ifelse(gender == 1, "Male", "Female")) %>%
-  select(class_group, gender,
+  select(class_group, 
          `Student's Gender`, `Average Course Evaluation Rating`) %>%
   filter(!is.na(`Average Course Evaluation Rating`)) %>%
   group_by(class_group, `Student's Gender`) %>%
@@ -646,6 +646,8 @@ write.csv(evaluation_likes_and_wishes,
 # techniques like *lemmatization*, which considers the context and grammatical
 # structure of words, are often preferred for certain Natural Language
 # Processing (NLP) tasks.
+
+#apply lemmintization LAB WORK
 
 # Summary:
 #  (i) Stemming: generally refers to removing suffixes from words to get the
