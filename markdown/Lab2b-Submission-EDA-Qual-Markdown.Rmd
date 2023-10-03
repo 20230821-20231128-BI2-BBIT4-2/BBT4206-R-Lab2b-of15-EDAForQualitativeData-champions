@@ -21,17 +21,17 @@ always_allow_html: true
 # Student Details
 
 +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Student ID Numbers and Names of Group Members** | *\<list one student name, class group (just the letter; A, B, or C), and ID per line, e.g., 123456 - A - John Leposo; you should be between 2 and 5 members per group\>* |
+| **Student ID Numbers and Names of Group Members** | ** |
 |                                                   |                                                                                                                                                                          |
-|                                                   | 1.  133996 - B - trevor                                                                                                                                              |
+|                                                   | 1.  133996 - B - Trevor Ngugi                                                                                                                                              |
 |                                                   |                                                                                                                                                                          |
-|                                                   | 2.  134111 - B - immaculate haayo                                                                                                                                              |
+|                                                   | 2.  134111 - B - Immaculate Haayo                                                                                                                                              |
 |                                                   |                                                                                                                                                                          |
-|                                                   | 3.  126762 - B - Virginia wanjiru                                                                                                                                              |
+|                                                   | 3.  126761 - B - Virginia Wanjiru                                                                                                                                              |
 |                                                   |                                                                                                                                                                          |
-|                                                   | 4.  135852 - B - pauline wairuim                                                                                                                                              |
+|                                                   | 4.  135859 - B - Pauline Wang'ombe                                                                                                                                              |
 |                                                   |                                                                                                                                                                          |
-|                                                   | 5.  122222 - B - claric muthoni                                                                                                                                              |
+|                                                   | 5.  127707 - B - Clarice Gitonga                                                                                                                                              |
 +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **GitHub Classroom Group Name**                   | champions                                                                                                      |
 +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
