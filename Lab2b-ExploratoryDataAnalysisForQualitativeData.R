@@ -503,7 +503,7 @@ summary(student_performance_dataset)
 evaluation_per_group_per_gender <- student_performance_dataset %>% # nolint
   mutate(`Student's Gender` =
            ifelse(gender == 1, "Male", "Female")) %>%
-  select(class_group, gender,
+  select(class_group,
          `Student's Gender`, `Average Course Evaluation Rating`) %>%
   filter(!is.na(`Average Course Evaluation Rating`)) %>%
   group_by(class_group, `Student's Gender`) %>%
@@ -689,6 +689,8 @@ write.csv(evaluation_likes_and_wishes,
 # Examples of stopwords in English include:
 # "the," "and," "is," "in," "it," "of," "to," "for," and "with."
 
+data(stop_words)
+View(stop_words)
 # Additional examples can be seen here:
 head(sample(stop_words$word, 20), 20)
 
