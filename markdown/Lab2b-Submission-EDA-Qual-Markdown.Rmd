@@ -4,15 +4,15 @@ author: "<Specify your group name here>"
 date: "<Specify the date when you submitted the lab>"
 output:
   github_document: 
+    
     toc: yes
     toc_depth: 4
     fig_width: 6
     fig_height: 4
     df_print: default
-    
 editor_options:
-  chunk_output_type: console
   
+  chunk_output_type: console
 always_allow_html: true
   
   
@@ -192,6 +192,26 @@ repos = "https://cloud.r-project.org")
 }
 require("readr")
 
+## textstem - Used to lemmatize words ----
+if (!is.element("textstem", installed.packages()[, 1])) {
+  install.packages("textstem", dependencies = TRUE,
+                   repos = "https://cloud.r-project.org")
+}
+require("textstem")
+
+## hunspell - High-Performance Stemmer, Tokenizer, and Spell Checker ----
+if (!is.element("hunspell", installed.packages()[, 1])) {
+  install.packages("hunspell", dependencies = TRUE,
+                   repos = "https://cloud.r-project.org")
+}
+require("hunspell")
+
+## stringr - For processing characters in a string ----
+if (!is.element("stringr", installed.packages()[, 1])) {
+  install.packages("stringr", dependencies = TRUE,
+                   repos = "https://cloud.r-project.org")
+}
+require("stringr")
 
 
 ```
@@ -290,7 +310,7 @@ kable_theme <- function(dat, caption) {
 ```{r Load Dataset}
 student_performance_dataset <-
   readr::read_csv(
-                  "../data/20230412-20230719-BI1-BBIT4-1-StudentPerformanceDataset.CSV", # nolint
+                  "../data/student_performance_dataset.csv", # nolint
                   col_types =
                   readr::cols(
                               class_group =
@@ -477,6 +497,7 @@ evaluation_per_group_per_gender %>%
 
 # STEP 5. Data Cleansing for Qualitative Data ----
 ## Contractions ----
+Below is a function to expand contractions in an English-language source (assuming that the students did not respond in sheng or Kiswahili).
 ```{r Your eight Code Chunk}
 expand_contractions <- function(doc) {
   doc <- gsub("I'm", "I am", doc, ignore.case = TRUE)
@@ -540,7 +561,7 @@ evaluation_likes_and_wishes$Wishes <- sapply(evaluation_likes_and_wishes$Wishes,
 ```
 
 ## how to use stop words
-```{r Your 13 Code Chunk}
+```{r Your 22 Code Chunk}
 # You can also create a list of words that you would like to censor
 undesirable_words <- c("wow", "lol", "none", "na")
 
@@ -566,7 +587,7 @@ evaluation_likes_filtered <- evaluation_likes_and_wishes %>% # nolint
 ```
 
 for the evaluations wishes filtered
-```{r Your 14 Code Chunk}
+```{r Your 23 Code Chunk}
 # The same is done to create a data frame for the "wishes" only
 evaluation_wishes_filtered <- evaluation_likes_and_wishes %>% # nolint
   unnest_tokens(word, Wishes) %>%
@@ -579,10 +600,129 @@ evaluation_wishes_filtered <- evaluation_likes_and_wishes %>% # nolint
 
 ```
 
+## Correct Spelling Mistakes
+To correct spelling mistakes before lemmatization
+```{r Your 144 Code Chunk}
+correct_spelling <- function(x) {
+  sapply(1:length(x),
+         function(y) {
+           bad <- hunspell(x[y])[[1]]
+           good <-
+             unlist(lapply(hunspell_suggest(bad),
+                           `[[`, 1))
+           
+           if (length(bad)) {
+             for (i in 1:length(bad)){
+               x[y] <<- gsub(bad[i], good[i], x[y])
+             }
+           }
+         }
+  )
+  x
+}
+
+
+```
+
+## Likes
+Before spelling correction
+```{r Your 14 Code Chunk}
+View(evaluation_likes_filtered)
+corrected_spelling <-
+  evaluation_likes_filtered$`Likes (tokenized)` %>%
+  correct_spelling()
+
+evaluation_likes_filtered$`Likes (tokenized)` <- corrected_spelling
+
+```
+
+## After spelling correction
+```{r Your 15 Code Chunk}
+View(evaluation_likes_filtered)
+
+```
+
+## Repeat the pre-processing for the correctly spelt words
+This is done for the sake of the words which were split into more than one word after correcting the spelling mistake.
+```{r Your 16 Code Chunk}
+# The repeated pre-processing includes:
+# 1. Expanding Contractions
+evaluation_likes_filtered$`Likes (tokenized)` <- sapply(evaluation_likes_filtered$`Likes (tokenized)`, expand_contractions) # nolint
+# 2. Remove special Characters
+evaluation_likes_filtered$`Likes (tokenized)` <- sapply(evaluation_likes_filtered$`Likes (tokenized)`, remove_special_characters) # nolint
+# 3. Convert to Lower-Case for a standard form
+evaluation_likes_filtered$`Likes (tokenized)` <- sapply(evaluation_likes_filtered$`Likes (tokenized)`, tolower) # nolint
+
+```
+
+## Tokenization 
+4. Tokenization, stopword removal, short word removal, and censorship
+```{r Your 17 Code Chunk}
+evaluation_likes_filtered <- evaluation_likes_filtered %>% # nolint
+  unnest_tokens(word, `Likes (tokenized)`, token = "ngrams", n = 1) %>%
+  anti_join(stop_words, by = c("word")) %>%
+  distinct() %>%
+  filter(!word %in% undesirable_words) %>%
+  filter(nchar(word) > 3) %>%
+  rename(`Likes (tokenized)` = word)
+
+
+View(evaluation_likes_filtered)
+```
+
+## Wishes
+Before spelling correction
+```{r Your 18 Code Chunk}
+View(evaluation_wishes_filtered)
+
+corrected_spelling <-
+  evaluation_wishes_filtered$`Wishes (tokenized)` %>%
+  correct_spelling()
+
+evaluation_wishes_filtered$`Wishes (tokenized)` <- corrected_spelling
+
+```
+
+##  After spelling correction
+```{r Your 19 Code Chunk}
+View(evaluation_wishes_filtered)
+
+```
+
+## Repeat the pre-processing for the correctly spelt words 
+This is done for the sake of the words which were split into more than one word after correcting the spelling mistake.
+```{r Your 20 Code Chunk}
+# The repeated pre-processing includes:
+# 1. Expanding Contractions
+evaluation_wishes_filtered$`Wishes (tokenized)` <- sapply(evaluation_wishes_filtered$`Wishes (tokenized)`, expand_contractions) # nolint
+# 2. Remove special Characters
+evaluation_wishes_filtered$`Wishes (tokenized)` <- sapply(evaluation_wishes_filtered$`Wishes (tokenized)`, remove_special_characters) # nolint
+# 3. Convert to Lower-Case for a standard form
+evaluation_wishes_filtered$`Wishes (tokenized)` <- sapply(evaluation_wishes_filtered$`Wishes (tokenized)`, tolower) # nolint
+
+
+```
+
+
+## We can now perform lemmatization on the correctly spelt words
+```{r Your 21 Code Chunk}
+lemma_dictionary_for_likes <-
+  make_lemma_dictionary(evaluation_likes_filtered$`Likes (tokenized)`,
+                        engine = "hunspell")
+
+evaluation_likes_filtered$`Likes (tokenized)` <-
+  evaluation_likes_filtered$`Likes (tokenized)` %>%
+  lemmatize_strings(dictionary = lemma_dictionary_for_likes)
+
+View(evaluation_likes_filtered)
+
+```
+
+
 # STEP 6. Word Count 
 ## Evaluation Likes 
 ### Word count per gender 
-```{r Your 15 Code Chunk}
+```{r Your 24 Code Chunk}
 word_count_per_gender_likes <- evaluation_likes_filtered %>%
   group_by(`Student's Gender`) %>%
   summarise(num_words = n()) %>%
@@ -591,7 +731,7 @@ word_count_per_gender_likes <- evaluation_likes_filtered %>%
 ```
 
 ## the values to be showed during word count
-```{r Your 16 Code Chunk}
+```{r Your 25 Code Chunk}
 word_count_per_gender_likes %>%
   mutate(num_words = color_bar("lightblue")(num_words)) %>%
   rename(`Number of Words` = num_words) %>%
@@ -625,7 +765,7 @@ word_count_per_group %>%
 
 ## Evaluation Wishes 
 ### Word count per gender 
-```{r Your 18 Code Chunk}
+```{r Your 26 Code Chunk}
 word_count_per_gender_wishes <- evaluation_wishes_filtered %>%
   group_by(`Student's Gender`) %>%
   summarise(num_words = n()) %>%
@@ -645,7 +785,7 @@ word_count_per_gender_wishes %>%
 ```
 
 ### Word count per group 
-```{r Your 19 Code Chunk}
+```{r Your 27 Code Chunk}
 word_count_per_group_wishes <- evaluation_wishes_filtered %>%
   group_by(`Class Group`) %>%
   summarise(num_words = n()) %>%
@@ -668,7 +808,7 @@ word_count_per_group_wishes %>%
 # STEP 7. Top Words 
 ## Evaluation Likes 
 ### Top 10 words for female students 
-```{r Your 20 Code Chunk}
+```{r Your 28 Code Chunk}
 evaluation_likes_filtered %>%
   select(`Class Group`, `Student's Gender`,
          `Average Course Evaluation Rating`, `Likes (tokenized)`) %>%
@@ -689,7 +829,7 @@ evaluation_likes_filtered %>%
 ```
 
 ### Top 10 words for male students 
-```{r Your 21 Code Chunk}
+```{r Your 29 Code Chunk}
 evaluation_likes_filtered %>%
   select(`Class Group`, `Student's Gender`,
          `Average Course Evaluation Rating`, `Likes (tokenized)`) %>%
@@ -710,7 +850,7 @@ evaluation_likes_filtered %>%
 
 
 ### Top 10 words per gender 
-```{r Your 22 Code Chunk}
+```{r Your 30 Code Chunk}
 popular_words <- evaluation_likes_filtered %>%
   group_by(`Student's Gender`) %>%
   count(`Likes (tokenized)`, `Student's Gender`, sort = TRUE) %>%
@@ -736,7 +876,7 @@ popular_words %>%
 
 
 ### Top words for Group A students 
-```{r Your 23 Code Chunk}
+```{r Your 31 Code Chunk}
 evaluation_likes_filtered %>%
   select(`Class Group`, `Student's Gender`,
          `Average Course Evaluation Rating`, `Likes (tokenized)`) %>%
@@ -756,7 +896,7 @@ evaluation_likes_filtered %>%
 ```
 
 ### Top words for Group B students 
-```{r Your 24 Code Chunk}
+```{r Your 32 Code Chunk}
 evaluation_likes_filtered %>%
   select(`Class Group`, `Student's Gender`,
          `Average Course Evaluation Rating`, `Likes (tokenized)`) %>%
@@ -776,7 +916,7 @@ evaluation_likes_filtered %>%
 ```
 
 ### Top words for Group C students 
-```{r Your 25 Code Chunk}
+```{r Your 33 Code Chunk}
 evaluation_likes_filtered %>%
   select(`Class Group`, `Student's Gender`,
          `Average Course Evaluation Rating`, `Likes (tokenized)`) %>%
@@ -796,7 +936,7 @@ evaluation_likes_filtered %>%
 ```
 
 ### Top 10 words per group 
-```{r Your 26 Code Chunk}
+```{r Your 34 Code Chunk}
 popular_words <- evaluation_likes_filtered %>%
   group_by(`Class Group`) %>%
   count(`Likes (tokenized)`, `Class Group`, sort = TRUE) %>%
@@ -822,7 +962,7 @@ popular_words %>%
 
 ## Evaluation Wishes 
 ### Top 10 words for female students 
-```{r Your 27 Code Chunk}
+```{r Your 35 Code Chunk}
 evaluation_wishes_filtered %>%
   select(`Class Group`, `Student's Gender`,
          `Average Course Evaluation Rating`, `Wishes (tokenized)`) %>%
@@ -842,7 +982,7 @@ evaluation_wishes_filtered %>%
 ```
 
 ### Top 10 words for male students 
-```{r Your 28 Code Chunk}
+```{r Your 36 Code Chunk}
 evaluation_wishes_filtered %>%
   select(`Class Group`, `Student's Gender`,
          `Average Course Evaluation Rating`, `Wishes (tokenized)`) %>%
@@ -862,7 +1002,7 @@ evaluation_wishes_filtered %>%
 ```
 
 ### Top 10 words per gender 
-```{r Your 29 Code Chunk}
+```{r Your 37 Code Chunk}
 popular_words <- evaluation_wishes_filtered %>%
   group_by(`Student's Gender`) %>%
   count(`Wishes (tokenized)`, `Student's Gender`, sort = TRUE) %>%
@@ -886,7 +1026,7 @@ popular_words %>%
 ```
 
 ### Top words for Group A students 
-```{r Your 30 Code Chunk}
+```{r Your 38 Code Chunk}
 evaluation_wishes_filtered %>%
   select(`Class Group`, `Student's Gender`,
          `Average Course Evaluation Rating`, `Wishes (tokenized)`) %>%
@@ -906,7 +1046,7 @@ evaluation_wishes_filtered %>%
 ```
 
 ### Top words for Group B students 
-```{r Your 31 Code Chunk}
+```{r Your 39 Code Chunk}
 evaluation_wishes_filtered %>%
   select(`Class Group`, `Student's Gender`,
          `Average Course Evaluation Rating`, `Wishes (tokenized)`) %>%
@@ -926,7 +1066,7 @@ evaluation_wishes_filtered %>%
 ```
 
 ### Top words for Group C students 
-```{r Your 32 Code Chunk}
+```{r Your 40 Code Chunk}
 evaluation_wishes_filtered %>%
   select(`Class Group`, `Student's Gender`,
          `Average Course Evaluation Rating`, `Wishes (tokenized)`) %>%
@@ -948,7 +1088,7 @@ evaluation_wishes_filtered %>%
 
 # STEP 8. Word Cloud 
 ## Evaluation Likes 
-```{r Your 34 Code Chunk}
+```{r Your 41 Code Chunk}
 evaluation_likes_filtered_cloud <- evaluation_likes_filtered %>% # nolint
   count(`Likes (tokenized)`, sort = TRUE)
 
@@ -957,7 +1097,7 @@ wordcloud2(evaluation_likes_filtered_cloud, size = .5)
 ```
 
 ## Evaluation Wishes 
-```{r Your 35 Code Chunk}
+```{r Your 42 Code Chunk}
 evaluation_wishes_filtered_cloud <- evaluation_wishes_filtered %>% # nolint
   count(`Wishes (tokenized)`, sort = TRUE)
 

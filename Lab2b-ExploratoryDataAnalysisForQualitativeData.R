@@ -313,7 +313,7 @@ kable_theme <- function(dat, caption) {
 # STEP 3. Load the Dataset ----
 student_performance_dataset <-
   readr::read_csv(
-                  "data/20230412-20230719-BI1-BBIT4-1-StudentPerformanceDataset.CSV", # nolint
+                  "data/student_performance_dataset.csv", # nolint
                   col_types =
                   readr::cols(
                               class_group =
@@ -647,7 +647,7 @@ write.csv(evaluation_likes_and_wishes,
 # structure of words, are often preferred for certain Natural Language
 # Processing (NLP) tasks.
 
-#apply lemmintization LAB WORK
+#apply lemmitization LAB WORK
 
 # Summary:
 #  (i) Stemming: generally refers to removing suffixes from words to get the
@@ -655,6 +655,57 @@ write.csv(evaluation_likes_and_wishes,
 #  (ii) Lemmatization: reducing inflected (or sometimes derived) words to their
 #       word stem, base or root form
 #  (iii) Word replacement: replace words with more frequently used synonyms
+
+### Correct Spelling Mistakes ----
+# We can correct spelling mistakes before lemmatization as follows:
+# Define a custom function to correct spelling
+correct_spelling <- function(x) {
+  sapply(1:length(x),
+         function(y) {
+           bad <- hunspell(x[y])[[1]]
+           good <-
+             unlist(lapply(hunspell_suggest(bad),
+                           `[[`, 1))
+           
+           if (length(bad)) {
+             for (i in 1:length(bad)){
+               x[y] <<- gsub(bad[i], good[i], x[y])
+             }
+           }
+         }
+  )
+  x
+}
+
+#### Likes ----
+# Before spelling correction
+# Take note of the following misspelt words (for the trigram):
+#   Line 40: "applicationsthe" instead of "applications the" # nolint
+#   Line 102: "intergration" instead of "integration" # nolint
+#   etc.
+View(evaluation_likes_filtered)
+
+corrected_spelling <-
+  evaluation_likes_filtered$`Likes (tokenized)` %>%
+  correct_spelling()
+
+evaluation_likes_filtered$`Likes (tokenized)` <- corrected_spelling
+
+# After spelling correction
+View(evaluation_likes_filtered)
+
+### Repeat the pre-processing for the correctly spelt words ----
+# This is done for the sake of the words which were split into more than one
+# word after correcting the spelling mistake.
+
+# The repeated pre-processing includes:
+# 1. Expanding Contractions
+evaluation_likes_filtered$`Likes (tokenized)` <- sapply(evaluation_likes_filtered$`Likes (tokenized)`, expand_contractions) # nolint
+# 2. Remove special Characters
+evaluation_likes_filtered$`Likes (tokenized)` <- sapply(evaluation_likes_filtered$`Likes (tokenized)`, remove_special_characters) # nolint
+# 3. Convert to Lower-Case for a standard form
+evaluation_likes_filtered$`Likes (tokenized)` <- sapply(evaluation_likes_filtered$`Likes (tokenized)`, tolower) # nolint
+
 
 ## Tokenization ----
 # The goal of text mining is to discover relevant information that is possibly
@@ -681,6 +732,105 @@ write.csv(evaluation_likes_and_wishes,
 # essential for understanding and working with textual data in computational
 # applications.
 
+evaluation_likes_filtered <- evaluation_likes_filtered %>% # nolint
+  unnest_tokens(word, `Likes (tokenized)`, token = "ngrams", n = 1) %>%
+  anti_join(stop_words, by = c("word")) %>%
+  distinct() %>%
+  filter(!word %in% undesirable_words) %>%
+  filter(nchar(word) > 3) %>%
+  rename(`Likes (tokenized)` = word)
+
+write.csv(evaluation_likes_filtered,
+          file = "data/evaluation_likes_filtered.csv",
+          row.names = FALSE)
+
+View(evaluation_likes_filtered)
+
+#### Wishes ----
+# Before spelling correction
+# Take note of the following misspelt words (for the trigram):
+#   Line 40: "applicationsthe" instead of "applications the" # nolint
+#   Line 102: "intergration" instead of "integration" # nolint
+#   etc.
+View(evaluation_wishes_filtered)
+
+corrected_spelling <-
+  evaluation_wishes_filtered$`Wishes (tokenized)` %>%
+  correct_spelling()
+
+evaluation_wishes_filtered$`Wishes (tokenized)` <- corrected_spelling
+
+# After spelling correction
+View(evaluation_wishes_filtered)
+
+### Repeat the pre-processing for the correctly spelt words ----
+# This is done for the sake of the words which were split into more than one
+# word after correcting the spelling mistake.
+
+# The repeated pre-processing includes:
+# 1. Expanding Contractions
+evaluation_wishes_filtered$`Wishes (tokenized)` <- sapply(evaluation_wishes_filtered$`Wishes (tokenized)`, expand_contractions) # nolint
+# 2. Remove special Characters
+evaluation_wishes_filtered$`Wishes (tokenized)` <- sapply(evaluation_wishes_filtered$`Wishes (tokenized)`, remove_special_characters) # nolint
+# 3. Convert to Lower-Case for a standard form
+evaluation_wishes_filtered$`Wishes (tokenized)` <- sapply(evaluation_wishes_filtered$`Wishes (tokenized)`, tolower) # nolint
+
+# 4. Tokenization, stopword removal, short word removal, and censorship
+evaluation_wishes_filtered <- evaluation_wishes_filtered %>% # nolint
+  unnest_tokens(word, `Wishes (tokenized)`, token = "ngrams", n = 1) %>%
+  anti_join(stop_words, by = c("word")) %>%
+  distinct() %>%
+  filter(!word %in% undesirable_words) %>%
+  filter(nchar(word) > 3) %>%
+  rename(`Wishes (tokenized)` = word)
+
+write.csv(evaluation_wishes_filtered,
+          file = "data/evaluation_wishes_filtered.csv",
+          row.names = FALSE)
+
+View(evaluation_wishes_filtered)
+
+### We can now perform lemmatization on the correctly spelt words ----
+# We need to first create a lemma lookup table. The lemmatize_strings()
+# function will then use this lookup table to replace the words.
+
+# Think of the lemma lookup table as a subset of an entire lemma dictionary.
+# This makes it easier to search for a word in the smaller lookup table
+# instead of searching for a word in the entire lemma dictionary.
+
+# Lemma lookup tables specific to a project can be made by referring to
+# a pre-existing lemma dictionary. The code below shows how the "Hunspell"
+# lemma dictionary is used to create  the lemma lookup table (subset of
+# the dictionary).
+
+# Lemma dictionaries include:
+#   1. Hunspell: https://hunspell.github.io/ or
+#                https://cran.r-project.org/package=hunspell
+#   2. koRpus: https://reaktanz.de/?c=hacking&s=koRpus or
+#              https://cran.r-project.org/package=koRpus
+#   3. Michal Měchura (2016): https://www.lexiconista.com/
+#   etc.
+
+lemma_dictionary_for_likes <-
+  make_lemma_dictionary(evaluation_likes_filtered$`Likes (tokenized)`,
+                        engine = "hunspell")
+
+evaluation_likes_filtered$`Likes (tokenized)` <-
+  evaluation_likes_filtered$`Likes (tokenized)` %>%
+  lemmatize_strings(dictionary = lemma_dictionary_for_likes)
+
+View(evaluation_likes_filtered)
+lemma_dictionary_for_wishes <-
+  make_lemma_dictionary(evaluation_wishes_filtered$`Wishes (tokenized)`,
+                        engine = "hunspell")
+
+evaluation_wishes_filtered$`Wishes (tokenized)` <-
+  evaluation_wishes_filtered$`Wishes (tokenized)` %>%
+  lemmatize_strings(dictionary = lemma_dictionary_for_wishes)
+
+View(evaluation_wishes_filtered)
+
+
 ## Stopword Removal, Short Word Removal, and Censorship ----
 
 # A stopword is a commonly used word that is usually filtered out during text
@@ -691,6 +841,8 @@ write.csv(evaluation_likes_and_wishes,
 # Examples of stopwords in English include:
 # "the," "and," "is," "in," "it," "of," "to," "for," and "with."
 
+data(stop_words)
+View(stop_words)
 # Additional examples can be seen here:
 head(sample(stop_words$word, 20), 20)
 
