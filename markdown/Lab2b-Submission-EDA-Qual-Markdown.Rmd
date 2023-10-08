@@ -310,7 +310,7 @@ kable_theme <- function(dat, caption) {
 ```{r Load Dataset}
 student_performance_dataset <-
   readr::read_csv(
-                  "../data/student_performance_dataset.csv", # nolint
+                  "../data/20230412-20230719-BI1-BBIT4-1-StudentPerformanceDataset.csv", # nolint
                   col_types =
                   readr::cols(
                               class_group =

@@ -3,82 +3,118 @@ Business Intelligence Lab Submission Markdown
 <Specify your group name here>
 <Specify the date when you submitted the lab>
 
-- [Student Details](#student-details)
-- [Setup Chunk](#setup-chunk)
-- [Loading the Student Performance
-  Dataset](#loading-the-student-performance-dataset)
-  - [Description of the Dataset](#description-of-the-dataset)
-- [STEP 4. Create a subset of the data using the “dplyr”
-  package](#step-4-create-a-subset-of-the-data-using-the-dplyr-package)
-  - [Plain tabular output](#plain-tabular-output)
-  - [Decorated tabular output](#decorated-tabular-output)
-- [STEP 5. Data Cleansing for Qualitative Data
-  —-](#step-5-data-cleansing-for-qualitative-data--)
-  - [Contractions —-](#contractions--)
-  - [Evaluation likes and wishes](#evaluation-likes-and-wishes)
-  - [expanding contractions](#expanding-contractions)
-  - [Special Characters and Lower Case
-    —-](#special-characters-and-lower-case--)
-    - [to remove special characters](#to-remove-special-characters)
-  - [Convert everything to lower
-    case](#convert-everything-to-lower-case)
-  - [how to use stop words](#how-to-use-stop-words)
-  - [Correct Spelling Mistakes](#correct-spelling-mistakes)
-  - [Likes](#likes)
-  - [After spelling correction](#after-spelling-correction)
-  - [Repeat the pre-processing for the correctly spelt
-    words](#repeat-the-pre-processing-for-the-correctly-spelt-words)
-  - [Tokenization](#tokenization)
-  - [Wishes](#wishes)
-  - [After spelling correction](#after-spelling-correction-1)
-  - [Repeat the pre-processing for the correctly spelt
-    words](#repeat-the-pre-processing-for-the-correctly-spelt-words-1)
-  - [We can now perform lemmatization on the correctly spelt
-    words](#we-can-now-perform-lemmatization-on-the-correctly-spelt-words)
-- [STEP 6. Word Count](#step-6-word-count)
-  - [Evaluation Likes](#evaluation-likes)
-    - [Word count per gender](#word-count-per-gender)
-  - [the values to be showed during word
-    count](#the-values-to-be-showed-during-word-count)
-  - [Evaluation Wishes](#evaluation-wishes)
-    - [Word count per gender](#word-count-per-gender-1)
-    - [Word count per group](#word-count-per-group)
-- [STEP 7. Top Words](#step-7-top-words)
-  - [Evaluation Likes](#evaluation-likes-1)
-    - [Top 10 words for female
-      students](#top-10-words-for-female-students)
-    - [Top 10 words for male students](#top-10-words-for-male-students)
-    - [Top 10 words per gender](#top-10-words-per-gender)
-    - [Top words for Group A students](#top-words-for-group-a-students)
-    - [Top words for Group B students](#top-words-for-group-b-students)
-    - [Top words for Group C students](#top-words-for-group-c-students)
-    - [Top 10 words per group](#top-10-words-per-group)
-  - [Evaluation Wishes](#evaluation-wishes-1)
-    - [Top 10 words for female
-      students](#top-10-words-for-female-students-1)
-    - [Top 10 words for male
-      students](#top-10-words-for-male-students-1)
-    - [Top 10 words per gender](#top-10-words-per-gender-1)
-    - [Top words for Group A
-      students](#top-words-for-group-a-students-1)
-    - [Top words for Group B
-      students](#top-words-for-group-b-students-1)
-    - [Top words for Group C
-      students](#top-words-for-group-c-students-1)
-- [STEP 8. Word Cloud](#step-8-word-cloud)
-  - [Evaluation Likes](#evaluation-likes-2)
-  - [Evaluation Wishes](#evaluation-wishes-2)
+  - [Student Details](#student-details)
+  - [Setup Chunk](#setup-chunk)
+  - [Loading the Student Performance
+    Dataset](#loading-the-student-performance-dataset)
+      - [Description of the Dataset](#description-of-the-dataset)
+  - [STEP 4. Create a subset of the data using the “dplyr”
+    package](#step-4-create-a-subset-of-the-data-using-the-dplyr-package)
+      - [Plain tabular output](#plain-tabular-output)
+      - [Decorated tabular output](#decorated-tabular-output)
+  - [STEP 5. Data Cleansing for Qualitative Data
+    —-](#step-5-data-cleansing-for-qualitative-data--)
+      - [Contractions —-](#contractions--)
+      - [Evaluation likes and wishes](#evaluation-likes-and-wishes)
+      - [expanding contractions](#expanding-contractions)
+      - [Special Characters and Lower Case
+        —-](#special-characters-and-lower-case--)
+          - [to remove special
+            characters](#to-remove-special-characters)
+      - [Convert everything to lower
+        case](#convert-everything-to-lower-case)
+      - [how to use stop words](#how-to-use-stop-words)
+      - [Correct Spelling Mistakes](#correct-spelling-mistakes)
+      - [Likes](#likes)
+      - [After spelling correction](#after-spelling-correction)
+      - [Repeat the pre-processing for the correctly spelt
+        words](#repeat-the-pre-processing-for-the-correctly-spelt-words)
+      - [Tokenization](#tokenization)
+      - [Wishes](#wishes)
+      - [After spelling correction](#after-spelling-correction-1)
+      - [Repeat the pre-processing for the correctly spelt
+        words](#repeat-the-pre-processing-for-the-correctly-spelt-words-1)
+      - [We can now perform lemmatization on the correctly spelt
+        words](#we-can-now-perform-lemmatization-on-the-correctly-spelt-words)
+  - [STEP 6. Word Count](#step-6-word-count)
+      - [Evaluation Likes](#evaluation-likes)
+          - [Word count per gender](#word-count-per-gender)
+      - [the values to be showed during word
+        count](#the-values-to-be-showed-during-word-count)
+      - [Evaluation Wishes](#evaluation-wishes)
+          - [Word count per gender](#word-count-per-gender-1)
+          - [Word count per group](#word-count-per-group)
+  - [STEP 7. Top Words](#step-7-top-words)
+      - [Evaluation Likes](#evaluation-likes-1)
+          - [Top 10 words for female
+            students](#top-10-words-for-female-students)
+          - [Top 10 words for male
+            students](#top-10-words-for-male-students)
+          - [Top 10 words per gender](#top-10-words-per-gender)
+          - [Top words for Group A
+            students](#top-words-for-group-a-students)
+          - [Top words for Group B
+            students](#top-words-for-group-b-students)
+          - [Top words for Group C
+            students](#top-words-for-group-c-students)
+          - [Top 10 words per group](#top-10-words-per-group)
+      - [Evaluation Wishes](#evaluation-wishes-1)
+          - [Top 10 words for female
+            students](#top-10-words-for-female-students-1)
+          - [Top 10 words for male
+            students](#top-10-words-for-male-students-1)
+          - [Top 10 words per gender](#top-10-words-per-gender-1)
+          - [Top words for Group A
+            students](#top-words-for-group-a-students-1)
+          - [Top words for Group B
+            students](#top-words-for-group-b-students-1)
+          - [Top words for Group C
+            students](#top-words-for-group-c-students-1)
+  - [STEP 8. Word Cloud](#step-8-word-cloud)
+      - [Evaluation Likes](#evaluation-likes-2)
+      - [Evaluation Wishes](#evaluation-wishes-2)
 
 # Student Details
 
-|                                                   |                                                                                                                                                                                                     |     |
-|---------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----|
-| **Student ID Numbers and Names of Group Members** | \*\* \| \| 1. 133996 - B - Trevor Ngugi \| \| 2. 134111 - B - Immaculate Haayo \| \| 3. 126761 - B - Virginia Wanjiru \| \| 4. 135859 - B - Pauline Wang’ombe \| 5. 127707 - B - Clarice Gitonga \| |     |
-| **GitHub Classroom Group Name**                   | champions \|                                                                                                                                                                                        |     |
-| **Course Code**                                   | BBT4206                                                                                                                                                                                             |     |
-| **Course Name**                                   | Business Intelligence II                                                                                                                                                                            |     |
-| **Program**                                       | Bachelor of Business Information Technology                                                                                                                                                         |     |
-| **Semester Duration**                             | 21<sup>st</sup> August 2023 to 28<sup>th</sup> November 2023                                                                                                                                        |     |
+<table>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 76%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><strong>Student ID Numbers and Names of Group Members</strong></td>
+<td><p>**</p>
+<ol type="1">
+<li><p>133996 - B - Trevor Ngugi</p></li>
+<li><p>134111 - B - Immaculate Haayo</p></li>
+<li><p>126761 - B - Virginia Wanjiru</p></li>
+<li><p>135859 - B - Pauline Wang’ombe</p></li>
+<li><p>127707 - B - Clarice Gitonga</p></li>
+</ol></td>
+</tr>
+<tr class="even">
+<td><strong>GitHub Classroom Group Name</strong></td>
+<td>champions</td>
+</tr>
+<tr class="odd">
+<td><strong>Course Code</strong></td>
+<td>BBT4206</td>
+</tr>
+<tr class="even">
+<td><strong>Course Name</strong></td>
+<td>Business Intelligence II</td>
+</tr>
+<tr class="odd">
+<td><strong>Program</strong></td>
+<td>Bachelor of Business Information Technology</td>
+</tr>
+<tr class="even">
+<td><strong>Semester Duration</strong></td>
+<td>21<sup>st</sup> August 2023 to 28<sup>th</sup> November 2023</td>
+</tr>
+</tbody>
+</table>
 
 # Setup Chunk
 
@@ -250,11 +286,12 @@ if (!is.element("stringr", installed.packages()[, 1])) {
 require("stringr")
 ```
 
-------------------------------------------------------------------------
+-----
 
 **Note:** the following “*KnitR*” options have been set as the defaults
 in this markdown:  
-`knitr::opts_chunk$set(echo = TRUE, warning = FALSE, eval = TRUE, collapse = FALSE, tidy.opts = list(width.cutoff = 80), tidy = TRUE)`.
+`knitr::opts_chunk$set(echo = TRUE, warning = FALSE, eval = TRUE,
+collapse = FALSE, tidy.opts = list(width.cutoff = 80), tidy = TRUE)`.
 
 More KnitR options are documented here
 <https://bookdown.org/yihui/rmarkdown-cookbook/chunk-options.html> and
@@ -270,22 +307,22 @@ knitr::opts_chunk$set(
 )
 ```
 
-------------------------------------------------------------------------
+-----
 
 **Note:** the following “*R Markdown*” options have been set as the
 defaults in this markdown:
 
 > output:  
 >   
-> github_document:  
+> github\_document:  
 > toc: yes  
-> toc_depth: 4  
-> fig_width: 6  
-> fig_height: 4  
-> df_print: default  
+> toc\_depth: 4  
+> fig\_width: 6  
+> fig\_height: 4  
+> df\_print: default  
 >   
-> editor_options:  
-> chunk_output_type: console
+> editor\_options:  
+> chunk\_output\_type: console
 
 # Loading the Student Performance Dataset
 
@@ -294,63 +331,46 @@ loaded. The dataset and its metadata are available here:
 <https://drive.google.com/drive/folders/1-BGEhfOwquXF6KKXwcvrx7WuZXuqmW9q?usp=sharing>
 
 ``` r
-# STEP 2. Customize the Visualizations, Tables, and Colour Scheme ----
-# The following defines a blue-grey colour scheme for the visualizations:
-## shades of blue and shades of grey
+# STEP 2. Customize the Visualizations, Tables, and Colour Scheme ---- The
+# following defines a blue-grey colour scheme for the visualizations: shades of
+# blue and shades of grey
 blue_grey_colours_11 <- c("#27408E", "#304FAF", "#536CB5", "#6981c7", "#8da0db",
-                          "#dde5ec", "#c8c9ca", "#B9BCC2", "#A7AAAF", "#888A8E",
-                          "#636569")
+    "#dde5ec", "#c8c9ca", "#B9BCC2", "#A7AAAF", "#888A8E", "#636569")
 
-blue_grey_colours_6 <- c("#27408E", "#304FAF", "#536CB5",
-                         "#B9BCC2", "#A7AAAF", "#888A8E")
+blue_grey_colours_6 <- c("#27408E", "#304FAF", "#536CB5", "#B9BCC2", "#A7AAAF", "#888A8E")
 
-blue_grey_colours_4 <- c("#27408E", "#536CB5",
-                         "#B9BCC2", "#888A8E")
+blue_grey_colours_4 <- c("#27408E", "#536CB5", "#B9BCC2", "#888A8E")
 
 blue_grey_colours_3 <- c("#6981c7", "#304FAF", "#888A8E")
 
-blue_grey_colours_2 <- c("#27408E",
-                         "#888A8E")
+blue_grey_colours_2 <- c("#27408E", "#888A8E")
 
 blue_grey_colours_1 <- c("#6981c7")
 
 # Custom theme for visualizations
 blue_grey_theme <- function() {
-  theme(
-    axis.ticks = element_line(
-                              linewidth = 1, linetype = "dashed",
-                              lineend = NULL, color = "#dfdede",
-                              arrow = NULL, inherit.blank = FALSE),
-    axis.text = element_text(
-                             face = "bold", color = "#3f3f41",
-                             size = 12, hjust = 0.5),
-    axis.title = element_text(face = "bold", color = "#3f3f41",
-                              size = 14, hjust = 0.5),
-    plot.title = element_text(face = "bold", color = "#3f3f41",
-                              size = 16, hjust = 0.5),
-    panel.grid = element_line(
-                              linewidth = 0.1, linetype = "dashed",
-                              lineend = NULL, color = "#dfdede",
-                              arrow = NULL, inherit.blank = FALSE),
-    panel.background = element_rect(fill = "#f3eeee"),
-    legend.title = element_text(face = "plain", color = "#3f3f41",
-                                size = 12, hjust = 0),
-    legend.position = "right"
-  )
+    theme(axis.ticks = element_line(linewidth = 1, linetype = "dashed", lineend = NULL,
+        color = "#dfdede", arrow = NULL, inherit.blank = FALSE), axis.text = element_text(face = "bold",
+        color = "#3f3f41", size = 12, hjust = 0.5), axis.title = element_text(face = "bold",
+        color = "#3f3f41", size = 14, hjust = 0.5), plot.title = element_text(face = "bold",
+        color = "#3f3f41", size = 16, hjust = 0.5), panel.grid = element_line(linewidth = 0.1,
+        linetype = "dashed", lineend = NULL, color = "#dfdede", arrow = NULL, inherit.blank = FALSE),
+        panel.background = element_rect(fill = "#f3eeee"), legend.title = element_text(face = "plain",
+            color = "#3f3f41", size = 12, hjust = 0), legend.position = "right")
 }
 
 # Customize the text tables for consistency using HTML formatting
 kable_theme <- function(dat, caption) {
-  kable(dat, "html", escape = FALSE, caption = caption) %>%
-    kable_styling(bootstrap_options = c("striped", "condensed", "bordered"),
-                  full_width = FALSE)
+    kable(dat, "html", escape = FALSE, caption = caption) %>%
+        kable_styling(bootstrap_options = c("striped", "condensed", "bordered"),
+            full_width = FALSE)
 }
 ```
 
 ``` r
 student_performance_dataset <-
   readr::read_csv(
-                  "../data/student_performance_dataset.csv", # nolint
+                  "../data/20230412-20230719-BI1-BBIT4-1-StudentPerformanceDataset.csv", # nolint
                   col_types =
                   readr::cols(
                               class_group =
@@ -954,15 +974,10 @@ View(evaluation_per_group_per_gender)
 
 ``` r
 evaluation_per_group_per_gender %>%
-  ggplot() +
-  geom_bar(aes(x = class_group, y = average_evaluation_rating,
-               fill = `Student's Gender`),
-           stat = "identity", position = "dodge") +
-  expand_limits(y = 0) +
-  blue_grey_theme() +
-  scale_fill_manual(values = blue_grey_colours_2) +
-  ggtitle("Course Evaluation Rating per Group and per Gender") +
-  labs(x = "Class Group", y = "Average Rating")
+    ggplot() + geom_bar(aes(x = class_group, y = average_evaluation_rating, fill = `Student's Gender`),
+    stat = "identity", position = "dodge") + expand_limits(y = 0) + blue_grey_theme() +
+    scale_fill_manual(values = blue_grey_colours_2) + ggtitle("Course Evaluation Rating per Group and per Gender") +
+    labs(x = "Class Group", y = "Average Rating")
 ```
 
 ![](Lab2b-Submission-EDA-Qual-Markdown_files/figure-gfm/Your%20Seven%20Code%20Chunk-1.png)<!-- -->
@@ -976,24 +991,24 @@ Below is a function to expand contractions in an English-language source
 
 ``` r
 expand_contractions <- function(doc) {
-  doc <- gsub("I'm", "I am", doc, ignore.case = TRUE)
-  doc <- gsub("you're", "you are", doc, ignore.case = TRUE)
-  doc <- gsub("he's", "he is", doc, ignore.case = TRUE)
-  doc <- gsub("she's", "she is", doc, ignore.case = TRUE)
-  doc <- gsub("it's", "it is", doc, ignore.case = TRUE)
-  doc <- gsub("we're", "we are", doc, ignore.case = TRUE)
-  doc <- gsub("they're", "they are", doc, ignore.case = TRUE)
-  doc <- gsub("I'll", "I will", doc, ignore.case = TRUE)
-  doc <- gsub("you'll", "you will", doc, ignore.case = TRUE)
-  doc <- gsub("he'll", "he will", doc, ignore.case = TRUE)
-  doc <- gsub("she'll", "she will", doc, ignore.case = TRUE)
-  doc <- gsub("it'll", "it will", doc, ignore.case = TRUE)
-  doc <- gsub("we'll", "we will", doc, ignore.case = TRUE)
-  doc <- gsub("they'll", "they will", doc, ignore.case = TRUE)
-  doc <- gsub("won't", "will not", doc, ignore.case = TRUE)
-  doc <- gsub("can't", "cannot", doc, ignore.case = TRUE)
-  doc <- gsub("n't", " not", doc, ignore.case = TRUE)
-  return(doc)
+    doc <- gsub("I'm", "I am", doc, ignore.case = TRUE)
+    doc <- gsub("you're", "you are", doc, ignore.case = TRUE)
+    doc <- gsub("he's", "he is", doc, ignore.case = TRUE)
+    doc <- gsub("she's", "she is", doc, ignore.case = TRUE)
+    doc <- gsub("it's", "it is", doc, ignore.case = TRUE)
+    doc <- gsub("we're", "we are", doc, ignore.case = TRUE)
+    doc <- gsub("they're", "they are", doc, ignore.case = TRUE)
+    doc <- gsub("I'll", "I will", doc, ignore.case = TRUE)
+    doc <- gsub("you'll", "you will", doc, ignore.case = TRUE)
+    doc <- gsub("he'll", "he will", doc, ignore.case = TRUE)
+    doc <- gsub("she'll", "she will", doc, ignore.case = TRUE)
+    doc <- gsub("it'll", "it will", doc, ignore.case = TRUE)
+    doc <- gsub("we'll", "we will", doc, ignore.case = TRUE)
+    doc <- gsub("they'll", "they will", doc, ignore.case = TRUE)
+    doc <- gsub("won't", "will not", doc, ignore.case = TRUE)
+    doc <- gsub("can't", "cannot", doc, ignore.case = TRUE)
+    doc <- gsub("n't", " not", doc, ignore.case = TRUE)
+    return(doc)
 }
 ```
 
@@ -1017,8 +1032,9 @@ evaluation_likes_and_wishes <- student_performance_dataset %>%
 ## expanding contractions
 
 ``` r
-evaluation_likes_and_wishes$Likes <- sapply(evaluation_likes_and_wishes$Likes, expand_contractions) # nolint
-evaluation_likes_and_wishes$Wishes <- sapply(evaluation_likes_and_wishes$Wishes, expand_contractions) # nolint
+evaluation_likes_and_wishes$Likes <- sapply(evaluation_likes_and_wishes$Likes, expand_contractions)  # nolint
+evaluation_likes_and_wishes$Wishes <- sapply(evaluation_likes_and_wishes$Wishes,
+    expand_contractions)  # nolint
 ```
 
 ## Special Characters and Lower Case —-
@@ -1027,17 +1043,19 @@ evaluation_likes_and_wishes$Wishes <- sapply(evaluation_likes_and_wishes$Wishes,
 
 ``` r
 remove_special_characters <- function(doc) {
-  gsub("[^a-zA-Z0-9 ]", "", doc, ignore.case = TRUE)
+    gsub("[^a-zA-Z0-9 ]", "", doc, ignore.case = TRUE)
 }
-evaluation_likes_and_wishes$Likes <- sapply(evaluation_likes_and_wishes$Likes, remove_special_characters) # nolint
-evaluation_likes_and_wishes$Wishes <- sapply(evaluation_likes_and_wishes$Wishes, remove_special_characters) # nolint
+evaluation_likes_and_wishes$Likes <- sapply(evaluation_likes_and_wishes$Likes, remove_special_characters)  # nolint
+evaluation_likes_and_wishes$Wishes <- sapply(evaluation_likes_and_wishes$Wishes,
+    remove_special_characters)  # nolint
 ```
 
 ## Convert everything to lower case
 
 ``` r
-evaluation_likes_and_wishes$Likes <- sapply(evaluation_likes_and_wishes$Likes, tolower) # nolint
-evaluation_likes_and_wishes$Wishes <- sapply(evaluation_likes_and_wishes$Wishes, tolower) # nolint
+evaluation_likes_and_wishes$Likes <- sapply(evaluation_likes_and_wishes$Likes, tolower)  # nolint
+evaluation_likes_and_wishes$Wishes <- sapply(evaluation_likes_and_wishes$Wishes,
+    tolower)  # nolint
 ```
 
 ## how to use stop words
@@ -1086,21 +1104,17 @@ To correct spelling mistakes before lemmatization
 
 ``` r
 correct_spelling <- function(x) {
-  sapply(1:length(x),
-         function(y) {
-           bad <- hunspell(x[y])[[1]]
-           good <-
-             unlist(lapply(hunspell_suggest(bad),
-                           `[[`, 1))
-           
-           if (length(bad)) {
-             for (i in 1:length(bad)){
-               x[y] <<- gsub(bad[i], good[i], x[y])
-             }
-           }
-         }
-  )
-  x
+    sapply(1:length(x), function(y) {
+        bad <- hunspell(x[y])[[1]]
+        good <- unlist(lapply(hunspell_suggest(bad), `[[`, 1))
+
+        if (length(bad)) {
+            for (i in 1:length(bad)) {
+                x[y] <<- gsub(bad[i], good[i], x[y])
+            }
+        }
+    })
+    x
 }
 ```
 
@@ -1110,9 +1124,8 @@ Before spelling correction
 
 ``` r
 View(evaluation_likes_filtered)
-corrected_spelling <-
-  evaluation_likes_filtered$`Likes (tokenized)` %>%
-  correct_spelling()
+corrected_spelling <- evaluation_likes_filtered$`Likes (tokenized)` %>%
+    correct_spelling()
 
 evaluation_likes_filtered$`Likes (tokenized)` <- corrected_spelling
 ```
@@ -1129,18 +1142,22 @@ This is done for the sake of the words which were split into more than
 one word after correcting the spelling mistake.
 
 ``` r
-# The repeated pre-processing includes:
-# 1. Expanding Contractions
-evaluation_likes_filtered$`Likes (tokenized)` <- sapply(evaluation_likes_filtered$`Likes (tokenized)`, expand_contractions) # nolint
+# The repeated pre-processing includes: 1. Expanding Contractions
+evaluation_likes_filtered$`Likes (tokenized)` <- sapply(evaluation_likes_filtered$`Likes (tokenized)`,
+    expand_contractions)  # nolint
 # 2. Remove special Characters
-evaluation_likes_filtered$`Likes (tokenized)` <- sapply(evaluation_likes_filtered$`Likes (tokenized)`, remove_special_characters) # nolint
+evaluation_likes_filtered$`Likes (tokenized)` <- sapply(evaluation_likes_filtered$`Likes (tokenized)`,
+    remove_special_characters)  # nolint
 # 3. Convert to Lower-Case for a standard form
-evaluation_likes_filtered$`Likes (tokenized)` <- sapply(evaluation_likes_filtered$`Likes (tokenized)`, tolower) # nolint
+evaluation_likes_filtered$`Likes (tokenized)` <- sapply(evaluation_likes_filtered$`Likes (tokenized)`,
+    tolower)  # nolint
 ```
 
 ## Tokenization
 
 4.  Tokenization, stopword removal, short word removal, and censorship
+
+<!-- end list -->
 
 ``` r
 evaluation_likes_filtered <- evaluation_likes_filtered %>% # nolint
@@ -1162,9 +1179,8 @@ Before spelling correction
 ``` r
 View(evaluation_wishes_filtered)
 
-corrected_spelling <-
-  evaluation_wishes_filtered$`Wishes (tokenized)` %>%
-  correct_spelling()
+corrected_spelling <- evaluation_wishes_filtered$`Wishes (tokenized)` %>%
+    correct_spelling()
 
 evaluation_wishes_filtered$`Wishes (tokenized)` <- corrected_spelling
 ```
@@ -1181,25 +1197,25 @@ This is done for the sake of the words which were split into more than
 one word after correcting the spelling mistake.
 
 ``` r
-# The repeated pre-processing includes:
-# 1. Expanding Contractions
-evaluation_wishes_filtered$`Wishes (tokenized)` <- sapply(evaluation_wishes_filtered$`Wishes (tokenized)`, expand_contractions) # nolint
+# The repeated pre-processing includes: 1. Expanding Contractions
+evaluation_wishes_filtered$`Wishes (tokenized)` <- sapply(evaluation_wishes_filtered$`Wishes (tokenized)`,
+    expand_contractions)  # nolint
 # 2. Remove special Characters
-evaluation_wishes_filtered$`Wishes (tokenized)` <- sapply(evaluation_wishes_filtered$`Wishes (tokenized)`, remove_special_characters) # nolint
+evaluation_wishes_filtered$`Wishes (tokenized)` <- sapply(evaluation_wishes_filtered$`Wishes (tokenized)`,
+    remove_special_characters)  # nolint
 # 3. Convert to Lower-Case for a standard form
-evaluation_wishes_filtered$`Wishes (tokenized)` <- sapply(evaluation_wishes_filtered$`Wishes (tokenized)`, tolower) # nolint
+evaluation_wishes_filtered$`Wishes (tokenized)` <- sapply(evaluation_wishes_filtered$`Wishes (tokenized)`,
+    tolower)  # nolint
 ```
 
 ## We can now perform lemmatization on the correctly spelt words
 
 ``` r
-lemma_dictionary_for_likes <-
-  make_lemma_dictionary(evaluation_likes_filtered$`Likes (tokenized)`,
-                        engine = "hunspell")
+lemma_dictionary_for_likes <- make_lemma_dictionary(evaluation_likes_filtered$`Likes (tokenized)`,
+    engine = "hunspell")
 
-evaluation_likes_filtered$`Likes (tokenized)` <-
-  evaluation_likes_filtered$`Likes (tokenized)` %>%
-  lemmatize_strings(dictionary = lemma_dictionary_for_likes)
+evaluation_likes_filtered$`Likes (tokenized)` <- evaluation_likes_filtered$`Likes (tokenized)` %>%
+    lemmatize_strings(dictionary = lemma_dictionary_for_likes)
 
 View(evaluation_likes_filtered)
 ```
@@ -1212,122 +1228,188 @@ View(evaluation_likes_filtered)
 
 ``` r
 word_count_per_gender_likes <- evaluation_likes_filtered %>%
-  group_by(`Student's Gender`) %>%
-  summarise(num_words = n()) %>%
-  arrange(desc(num_words))
+    group_by(`Student's Gender`) %>%
+    summarise(num_words = n()) %>%
+    arrange(desc(num_words))
 ```
 
 ## the values to be showed during word count
 
 ``` r
 word_count_per_gender_likes %>%
-  mutate(num_words = color_bar("lightblue")(num_words)) %>%
-  rename(`Number of Words` = num_words) %>%
-  kable("html", escape = FALSE, align = "c",
-        caption = "Number of Significant Words in Evaluation Likes 
+    mutate(num_words = color_bar("lightblue")(num_words)) %>%
+    rename(`Number of Words` = num_words) %>%
+    kable("html", escape = FALSE, align = "c", caption = "Number of Significant Words in Evaluation Likes 
                    per Gender: Minus contractions, special characters, 
                    stopwords, short words, and censored words.") %>%
-  kable_styling(bootstrap_options =
-                  c("striped", "condensed", "bordered"),
-                full_width = FALSE)
+    kable_styling(bootstrap_options = c("striped", "condensed", "bordered"), full_width = FALSE)
 ```
 
 <table class="table table-striped table-condensed table-bordered" style="width: auto !important; margin-left: auto; margin-right: auto;">
+
 <caption>
+
 Number of Significant Words in Evaluation Likes per Gender: Minus
 contractions, special characters, stopwords, short words, and censored
 words.
+
 </caption>
+
 <thead>
+
 <tr>
+
 <th style="text-align:center;">
+
 Student’s Gender
+
 </th>
+
 <th style="text-align:center;">
+
 Number of Words
+
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:center;">
+
 Male
+
 </td>
+
 <td style="text-align:center;">
+
 <span style="display: inline-block; direction: rtl; unicode-bidi: plaintext; border-radius: 4px; padding-right: 2px; background-color: lightblue; width: 100.00%">259</span>
+
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;">
+
 Female
+
 </td>
+
 <td style="text-align:center;">
+
 <span style="display: inline-block; direction: rtl; unicode-bidi: plaintext; border-radius: 4px; padding-right: 2px; background-color: lightblue; width: 79.54%">206</span>
+
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ``` r
 word_count_per_group <- evaluation_likes_filtered %>%
-  group_by(`Class Group`) %>%
-  summarise(num_words = n()) %>%
-  arrange(desc(num_words))
+    group_by(`Class Group`) %>%
+    summarise(num_words = n()) %>%
+    arrange(desc(num_words))
 
 word_count_per_group %>%
-  mutate(num_words = color_bar("lightblue")(num_words)) %>%
-  rename(`Number of Words` = num_words) %>%
-  kable("html", escape = FALSE, align = "c",
-        caption = "Number of Significant Words in Evaluation Likes 
+    mutate(num_words = color_bar("lightblue")(num_words)) %>%
+    rename(`Number of Words` = num_words) %>%
+    kable("html", escape = FALSE, align = "c", caption = "Number of Significant Words in Evaluation Likes 
                    per Group: Minus contractions, special characters, 
                    stopwords, short words, and censored words.") %>%
-  kable_styling(bootstrap_options =
-                  c("striped", "condensed", "bordered"),
-                full_width = FALSE)
+    kable_styling(bootstrap_options = c("striped", "condensed", "bordered"), full_width = FALSE)
 ```
 
 <table class="table table-striped table-condensed table-bordered" style="width: auto !important; margin-left: auto; margin-right: auto;">
+
 <caption>
+
 Number of Significant Words in Evaluation Likes per Group: Minus
 contractions, special characters, stopwords, short words, and censored
 words.
+
 </caption>
+
 <thead>
+
 <tr>
+
 <th style="text-align:center;">
+
 Class Group
+
 </th>
+
 <th style="text-align:center;">
+
 Number of Words
+
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:center;">
+
 C
+
 </td>
+
 <td style="text-align:center;">
+
 <span style="display: inline-block; direction: rtl; unicode-bidi: plaintext; border-radius: 4px; padding-right: 2px; background-color: lightblue; width: 100.00%">221</span>
+
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;">
+
 B
+
 </td>
+
 <td style="text-align:center;">
+
 <span style="display: inline-block; direction: rtl; unicode-bidi: plaintext; border-radius: 4px; padding-right: 2px; background-color: lightblue; width: 70.59%">156</span>
+
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;">
+
 A
+
 </td>
+
 <td style="text-align:center;">
+
 <span style="display: inline-block; direction: rtl; unicode-bidi: plaintext; border-radius: 4px; padding-right: 2px; background-color: lightblue; width: 39.82%">88</span>
+
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ## Evaluation Wishes
@@ -1336,120 +1418,186 @@ A
 
 ``` r
 word_count_per_gender_wishes <- evaluation_wishes_filtered %>%
-  group_by(`Student's Gender`) %>%
-  summarise(num_words = n()) %>%
-  arrange(desc(num_words))
+    group_by(`Student's Gender`) %>%
+    summarise(num_words = n()) %>%
+    arrange(desc(num_words))
 
 word_count_per_gender_wishes %>%
-  mutate(num_words = color_bar("lightblue")(num_words)) %>%
-  rename(`Number of Words` = num_words) %>%
-  kable("html", escape = FALSE, align = "c",
-        caption = "Number of Significant Words in Evaluation Wishes 
+    mutate(num_words = color_bar("lightblue")(num_words)) %>%
+    rename(`Number of Words` = num_words) %>%
+    kable("html", escape = FALSE, align = "c", caption = "Number of Significant Words in Evaluation Wishes 
                    per Gender: Minus contractions, special characters, 
                    stopwords, short words, and censored words.") %>%
-  kable_styling(bootstrap_options =
-                  c("striped", "condensed", "bordered"),
-                full_width = FALSE)
+    kable_styling(bootstrap_options = c("striped", "condensed", "bordered"), full_width = FALSE)
 ```
 
 <table class="table table-striped table-condensed table-bordered" style="width: auto !important; margin-left: auto; margin-right: auto;">
+
 <caption>
+
 Number of Significant Words in Evaluation Wishes per Gender: Minus
 contractions, special characters, stopwords, short words, and censored
 words.
+
 </caption>
+
 <thead>
+
 <tr>
+
 <th style="text-align:center;">
+
 Student’s Gender
+
 </th>
+
 <th style="text-align:center;">
+
 Number of Words
+
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:center;">
+
 Male
+
 </td>
+
 <td style="text-align:center;">
+
 <span style="display: inline-block; direction: rtl; unicode-bidi: plaintext; border-radius: 4px; padding-right: 2px; background-color: lightblue; width: 100.00%">150</span>
+
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;">
+
 Female
+
 </td>
+
 <td style="text-align:center;">
+
 <span style="display: inline-block; direction: rtl; unicode-bidi: plaintext; border-radius: 4px; padding-right: 2px; background-color: lightblue; width: 72.67%">109</span>
+
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ### Word count per group
 
 ``` r
 word_count_per_group_wishes <- evaluation_wishes_filtered %>%
-  group_by(`Class Group`) %>%
-  summarise(num_words = n()) %>%
-  arrange(desc(num_words))
+    group_by(`Class Group`) %>%
+    summarise(num_words = n()) %>%
+    arrange(desc(num_words))
 
 word_count_per_group_wishes %>%
-  mutate(num_words = color_bar("lightblue")(num_words)) %>%
-  rename(`Number of Words` = num_words) %>%
-  kable("html", escape = FALSE, align = "c",
-        caption = "Number of Significant Words in Evaluation Wishes 
+    mutate(num_words = color_bar("lightblue")(num_words)) %>%
+    rename(`Number of Words` = num_words) %>%
+    kable("html", escape = FALSE, align = "c", caption = "Number of Significant Words in Evaluation Wishes 
                    per Group: Minus contractions, special characters, 
                    stopwords, short words, and censored words.") %>%
-  kable_styling(bootstrap_options =
-                  c("striped", "condensed", "bordered"),
-                full_width = FALSE)
+    kable_styling(bootstrap_options = c("striped", "condensed", "bordered"), full_width = FALSE)
 ```
 
 <table class="table table-striped table-condensed table-bordered" style="width: auto !important; margin-left: auto; margin-right: auto;">
+
 <caption>
+
 Number of Significant Words in Evaluation Wishes per Group: Minus
 contractions, special characters, stopwords, short words, and censored
 words.
+
 </caption>
+
 <thead>
+
 <tr>
+
 <th style="text-align:center;">
+
 Class Group
+
 </th>
+
 <th style="text-align:center;">
+
 Number of Words
+
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:center;">
+
 C
+
 </td>
+
 <td style="text-align:center;">
+
 <span style="display: inline-block; direction: rtl; unicode-bidi: plaintext; border-radius: 4px; padding-right: 2px; background-color: lightblue; width: 100.00%">135</span>
+
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;">
+
 B
+
 </td>
+
 <td style="text-align:center;">
+
 <span style="display: inline-block; direction: rtl; unicode-bidi: plaintext; border-radius: 4px; padding-right: 2px; background-color: lightblue; width: 64.44%">87</span>
+
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;">
+
 A
+
 </td>
+
 <td style="text-align:center;">
+
 <span style="display: inline-block; direction: rtl; unicode-bidi: plaintext; border-radius: 4px; padding-right: 2px; background-color: lightblue; width: 27.41%">37</span>
+
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 # STEP 7. Top Words
@@ -1460,20 +1608,17 @@ A
 
 ``` r
 evaluation_likes_filtered %>%
-  select(`Class Group`, `Student's Gender`,
-         `Average Course Evaluation Rating`, `Likes (tokenized)`) %>%
-  filter(`Student's Gender` == "Female") %>%
-  count(`Likes (tokenized)`, sort = TRUE) %>%
-  top_n(9) %>%
-  mutate(`Likes (tokenized)` = reorder(`Likes (tokenized)`, n)) %>%
-  ggplot() +
-  geom_col(aes(`Likes (tokenized)`, n), fill = blue_grey_colours_1) +
-  blue_grey_theme() +
-  xlab("Word in Course Evaluation") +
-  ylab("Number of Times Used (Term Frequency)") +
-  ggtitle("Most Frequently Used Words in Course Evaluation Likes for Female
+    select(`Class Group`, `Student's Gender`, `Average Course Evaluation Rating`,
+        `Likes (tokenized)`) %>%
+    filter(`Student's Gender` == "Female") %>%
+    count(`Likes (tokenized)`, sort = TRUE) %>%
+    top_n(9) %>%
+    mutate(`Likes (tokenized)` = reorder(`Likes (tokenized)`, n)) %>%
+    ggplot() + geom_col(aes(`Likes (tokenized)`, n), fill = blue_grey_colours_1) +
+    blue_grey_theme() + xlab("Word in Course Evaluation") + ylab("Number of Times Used (Term Frequency)") +
+    ggtitle("Most Frequently Used Words in Course Evaluation Likes for Female
           Students") +
-  coord_flip()
+    coord_flip()
 ```
 
     ## Selecting by n
@@ -1484,20 +1629,17 @@ evaluation_likes_filtered %>%
 
 ``` r
 evaluation_likes_filtered %>%
-  select(`Class Group`, `Student's Gender`,
-         `Average Course Evaluation Rating`, `Likes (tokenized)`) %>%
-  filter(`Student's Gender` == "Male") %>%
-  count(`Likes (tokenized)`, sort = TRUE) %>%
-  top_n(9) %>%
-  mutate(`Likes (tokenized)` = reorder(`Likes (tokenized)`, n)) %>%
-  ggplot() +
-  geom_col(aes(`Likes (tokenized)`, n), fill = blue_grey_colours_1) +
-  blue_grey_theme() +
-  xlab("Word in Course Evaluation") +
-  ylab("Number of Times Used (Term Frequency)") +
-  ggtitle("Most Frequently Used Words in Course Evaluation Likes for Male
+    select(`Class Group`, `Student's Gender`, `Average Course Evaluation Rating`,
+        `Likes (tokenized)`) %>%
+    filter(`Student's Gender` == "Male") %>%
+    count(`Likes (tokenized)`, sort = TRUE) %>%
+    top_n(9) %>%
+    mutate(`Likes (tokenized)` = reorder(`Likes (tokenized)`, n)) %>%
+    ggplot() + geom_col(aes(`Likes (tokenized)`, n), fill = blue_grey_colours_1) +
+    blue_grey_theme() + xlab("Word in Course Evaluation") + ylab("Number of Times Used (Term Frequency)") +
+    ggtitle("Most Frequently Used Words in Course Evaluation Likes for Male
           Students") +
-  coord_flip()
+    coord_flip()
 ```
 
     ## Selecting by n
@@ -1508,25 +1650,19 @@ evaluation_likes_filtered %>%
 
 ``` r
 popular_words <- evaluation_likes_filtered %>%
-  group_by(`Student's Gender`) %>%
-  count(`Likes (tokenized)`, `Student's Gender`, sort = TRUE) %>%
-  slice(seq_len(10)) %>%
-  ungroup() %>%
-  arrange(`Student's Gender`, n) %>%
-  mutate(row = row_number())
+    group_by(`Student's Gender`) %>%
+    count(`Likes (tokenized)`, `Student's Gender`, sort = TRUE) %>%
+    slice(seq_len(10)) %>%
+    ungroup() %>%
+    arrange(`Student's Gender`, n) %>%
+    mutate(row = row_number())
 
 popular_words %>%
-  ggplot(aes(row, n, fill = `Student's Gender`)) +
-  geom_col(fill = blue_grey_colours_1) +
-  blue_grey_theme() +
-  labs(x = "Word in Course Evaluation",
-       y = "Number of Times Used (Term Frequency)") +
-  ggtitle("Most Frequently Used Words in Course Evaluation Likes per Gender") +
-  facet_wrap(~`Student's Gender`, scales = "free") +
-  scale_x_continuous(
-                     breaks = popular_words$row,
-                     labels = popular_words$`Likes (tokenized)`) +
-  coord_flip()
+    ggplot(aes(row, n, fill = `Student's Gender`)) + geom_col(fill = blue_grey_colours_1) +
+    blue_grey_theme() + labs(x = "Word in Course Evaluation", y = "Number of Times Used (Term Frequency)") +
+    ggtitle("Most Frequently Used Words in Course Evaluation Likes per Gender") +
+    facet_wrap(~`Student's Gender`, scales = "free") + scale_x_continuous(breaks = popular_words$row,
+    labels = popular_words$`Likes (tokenized)`) + coord_flip()
 ```
 
 ![](Lab2b-Submission-EDA-Qual-Markdown_files/figure-gfm/Your%2030%20Code%20Chunk-1.png)<!-- -->
@@ -1535,20 +1671,17 @@ popular_words %>%
 
 ``` r
 evaluation_likes_filtered %>%
-  select(`Class Group`, `Student's Gender`,
-         `Average Course Evaluation Rating`, `Likes (tokenized)`) %>%
-  filter(`Class Group` == "A") %>%
-  count(`Likes (tokenized)`, sort = TRUE) %>%
-  top_n(9) %>%
-  mutate(`Likes (tokenized)` = reorder(`Likes (tokenized)`, n)) %>%
-  ggplot() +
-  geom_col(aes(`Likes (tokenized)`, n), fill = blue_grey_colours_1) +
-  blue_grey_theme() +
-  xlab("Word in Course Evaluation") +
-  ylab("Number of Times Used (Term Frequency)") +
-  ggtitle("Most Frequently Used Words in Course Evaluation Likes for Group A
+    select(`Class Group`, `Student's Gender`, `Average Course Evaluation Rating`,
+        `Likes (tokenized)`) %>%
+    filter(`Class Group` == "A") %>%
+    count(`Likes (tokenized)`, sort = TRUE) %>%
+    top_n(9) %>%
+    mutate(`Likes (tokenized)` = reorder(`Likes (tokenized)`, n)) %>%
+    ggplot() + geom_col(aes(`Likes (tokenized)`, n), fill = blue_grey_colours_1) +
+    blue_grey_theme() + xlab("Word in Course Evaluation") + ylab("Number of Times Used (Term Frequency)") +
+    ggtitle("Most Frequently Used Words in Course Evaluation Likes for Group A
           Students") +
-  coord_flip()
+    coord_flip()
 ```
 
     ## Selecting by n
@@ -1559,20 +1692,17 @@ evaluation_likes_filtered %>%
 
 ``` r
 evaluation_likes_filtered %>%
-  select(`Class Group`, `Student's Gender`,
-         `Average Course Evaluation Rating`, `Likes (tokenized)`) %>%
-  filter(`Class Group` == "B") %>%
-  count(`Likes (tokenized)`, sort = TRUE) %>%
-  top_n(9) %>%
-  mutate(`Likes (tokenized)` = reorder(`Likes (tokenized)`, n)) %>%
-  ggplot() +
-  geom_col(aes(`Likes (tokenized)`, n), fill = blue_grey_colours_1) +
-  blue_grey_theme() +
-  xlab("Word in Course Evaluation") +
-  ylab("Number of Times Used (Term Frequency)") +
-  ggtitle("Most Frequently Used Words in Course Evaluation Likes for Group B
+    select(`Class Group`, `Student's Gender`, `Average Course Evaluation Rating`,
+        `Likes (tokenized)`) %>%
+    filter(`Class Group` == "B") %>%
+    count(`Likes (tokenized)`, sort = TRUE) %>%
+    top_n(9) %>%
+    mutate(`Likes (tokenized)` = reorder(`Likes (tokenized)`, n)) %>%
+    ggplot() + geom_col(aes(`Likes (tokenized)`, n), fill = blue_grey_colours_1) +
+    blue_grey_theme() + xlab("Word in Course Evaluation") + ylab("Number of Times Used (Term Frequency)") +
+    ggtitle("Most Frequently Used Words in Course Evaluation Likes for Group B
           Students") +
-  coord_flip()
+    coord_flip()
 ```
 
     ## Selecting by n
@@ -1583,20 +1713,17 @@ evaluation_likes_filtered %>%
 
 ``` r
 evaluation_likes_filtered %>%
-  select(`Class Group`, `Student's Gender`,
-         `Average Course Evaluation Rating`, `Likes (tokenized)`) %>%
-  filter(`Class Group` == "C") %>%
-  count(`Likes (tokenized)`, sort = TRUE) %>%
-  top_n(9) %>%
-  mutate(`Likes (tokenized)` = reorder(`Likes (tokenized)`, n)) %>%
-  ggplot() +
-  geom_col(aes(`Likes (tokenized)`, n), fill = blue_grey_colours_1) +
-  blue_grey_theme() +
-  xlab("Word in Course Evaluation") +
-  ylab("Number of Times Used (Term Frequency)") +
-  ggtitle("Most Frequently Used Words in Course Evaluation Likes for Group C
+    select(`Class Group`, `Student's Gender`, `Average Course Evaluation Rating`,
+        `Likes (tokenized)`) %>%
+    filter(`Class Group` == "C") %>%
+    count(`Likes (tokenized)`, sort = TRUE) %>%
+    top_n(9) %>%
+    mutate(`Likes (tokenized)` = reorder(`Likes (tokenized)`, n)) %>%
+    ggplot() + geom_col(aes(`Likes (tokenized)`, n), fill = blue_grey_colours_1) +
+    blue_grey_theme() + xlab("Word in Course Evaluation") + ylab("Number of Times Used (Term Frequency)") +
+    ggtitle("Most Frequently Used Words in Course Evaluation Likes for Group C
           Students") +
-  coord_flip()
+    coord_flip()
 ```
 
     ## Selecting by n
@@ -1607,25 +1734,20 @@ evaluation_likes_filtered %>%
 
 ``` r
 popular_words <- evaluation_likes_filtered %>%
-  group_by(`Class Group`) %>%
-  count(`Likes (tokenized)`, `Class Group`, sort = TRUE) %>%
-  slice(seq_len(10)) %>%
-  ungroup() %>%
-  arrange(`Class Group`, n) %>%
-  mutate(row = row_number())
+    group_by(`Class Group`) %>%
+    count(`Likes (tokenized)`, `Class Group`, sort = TRUE) %>%
+    slice(seq_len(10)) %>%
+    ungroup() %>%
+    arrange(`Class Group`, n) %>%
+    mutate(row = row_number())
 
 popular_words %>%
-  ggplot(aes(row, n, fill = `Class Group`)) +
-  geom_col(fill = blue_grey_colours_1) +
-  blue_grey_theme() +
-  labs(x = "Word in Course Evaluation", y = "Number of Times Used") +
-  ggtitle("Most Frequently Used Words in Course Evaluation Likes per 
+    ggplot(aes(row, n, fill = `Class Group`)) + geom_col(fill = blue_grey_colours_1) +
+    blue_grey_theme() + labs(x = "Word in Course Evaluation", y = "Number of Times Used") +
+    ggtitle("Most Frequently Used Words in Course Evaluation Likes per 
           Class Group") +
-  facet_wrap(~`Class Group`, scales = "free") +
-  scale_x_continuous(
-                     breaks = popular_words$row,
-                     labels = popular_words$`Likes (tokenized)`) +
-  coord_flip()
+    facet_wrap(~`Class Group`, scales = "free") + scale_x_continuous(breaks = popular_words$row,
+    labels = popular_words$`Likes (tokenized)`) + coord_flip()
 ```
 
 ![](Lab2b-Submission-EDA-Qual-Markdown_files/figure-gfm/Your%2034%20Code%20Chunk-1.png)<!-- -->
@@ -1636,20 +1758,17 @@ popular_words %>%
 
 ``` r
 evaluation_wishes_filtered %>%
-  select(`Class Group`, `Student's Gender`,
-         `Average Course Evaluation Rating`, `Wishes (tokenized)`) %>%
-  filter(`Student's Gender` == "Female") %>%
-  count(`Wishes (tokenized)`, sort = TRUE) %>%
-  top_n(9) %>%
-  mutate(`Wishes (tokenized)` = reorder(`Wishes (tokenized)`, n)) %>%
-  ggplot() +
-  geom_col(aes(`Wishes (tokenized)`, n), fill = blue_grey_colours_1) +
-  blue_grey_theme() +
-  xlab("Word in Course Evaluation") +
-  ylab("Number of Times Used (Term Frequency)") +
-  ggtitle("Most Frequently Used Words in Course Evaluation Wishes for Female
+    select(`Class Group`, `Student's Gender`, `Average Course Evaluation Rating`,
+        `Wishes (tokenized)`) %>%
+    filter(`Student's Gender` == "Female") %>%
+    count(`Wishes (tokenized)`, sort = TRUE) %>%
+    top_n(9) %>%
+    mutate(`Wishes (tokenized)` = reorder(`Wishes (tokenized)`, n)) %>%
+    ggplot() + geom_col(aes(`Wishes (tokenized)`, n), fill = blue_grey_colours_1) +
+    blue_grey_theme() + xlab("Word in Course Evaluation") + ylab("Number of Times Used (Term Frequency)") +
+    ggtitle("Most Frequently Used Words in Course Evaluation Wishes for Female
           Students") +
-  coord_flip()
+    coord_flip()
 ```
 
     ## Selecting by n
@@ -1660,20 +1779,17 @@ evaluation_wishes_filtered %>%
 
 ``` r
 evaluation_wishes_filtered %>%
-  select(`Class Group`, `Student's Gender`,
-         `Average Course Evaluation Rating`, `Wishes (tokenized)`) %>%
-  filter(`Student's Gender` == "Male") %>%
-  count(`Wishes (tokenized)`, sort = TRUE) %>%
-  top_n(9) %>%
-  mutate(`Wishes (tokenized)` = reorder(`Wishes (tokenized)`, n)) %>%
-  ggplot() +
-  geom_col(aes(`Wishes (tokenized)`, n), fill = blue_grey_colours_1) +
-  blue_grey_theme() +
-  xlab("Word in Course Evaluation") +
-  ylab("Number of Times Used (Term Frequency)") +
-  ggtitle("Most Frequently Used Words in Course Evaluation Wishes for Male
+    select(`Class Group`, `Student's Gender`, `Average Course Evaluation Rating`,
+        `Wishes (tokenized)`) %>%
+    filter(`Student's Gender` == "Male") %>%
+    count(`Wishes (tokenized)`, sort = TRUE) %>%
+    top_n(9) %>%
+    mutate(`Wishes (tokenized)` = reorder(`Wishes (tokenized)`, n)) %>%
+    ggplot() + geom_col(aes(`Wishes (tokenized)`, n), fill = blue_grey_colours_1) +
+    blue_grey_theme() + xlab("Word in Course Evaluation") + ylab("Number of Times Used (Term Frequency)") +
+    ggtitle("Most Frequently Used Words in Course Evaluation Wishes for Male
           Students") +
-  coord_flip()
+    coord_flip()
 ```
 
     ## Selecting by n
@@ -1684,24 +1800,19 @@ evaluation_wishes_filtered %>%
 
 ``` r
 popular_words <- evaluation_wishes_filtered %>%
-  group_by(`Student's Gender`) %>%
-  count(`Wishes (tokenized)`, `Student's Gender`, sort = TRUE) %>%
-  slice(seq_len(10)) %>%
-  ungroup() %>%
-  arrange(`Student's Gender`, n) %>%
-  mutate(row = row_number())
+    group_by(`Student's Gender`) %>%
+    count(`Wishes (tokenized)`, `Student's Gender`, sort = TRUE) %>%
+    slice(seq_len(10)) %>%
+    ungroup() %>%
+    arrange(`Student's Gender`, n) %>%
+    mutate(row = row_number())
 
 popular_words %>%
-  ggplot(aes(row, n, fill = `Student's Gender`)) +
-  geom_col(fill = blue_grey_colours_1) +
-  blue_grey_theme() +
-  labs(x = "Word in Course Evaluation", y = "Number of Times Used") +
-  ggtitle("Most Frequently Used Words in Course Evaluation Wishes per Gender") +
-  facet_wrap(~`Student's Gender`, scales = "free") +
-  scale_x_continuous(
-                     breaks = popular_words$row,
-                     labels = popular_words$`Wishes (tokenized)`) +
-  coord_flip()
+    ggplot(aes(row, n, fill = `Student's Gender`)) + geom_col(fill = blue_grey_colours_1) +
+    blue_grey_theme() + labs(x = "Word in Course Evaluation", y = "Number of Times Used") +
+    ggtitle("Most Frequently Used Words in Course Evaluation Wishes per Gender") +
+    facet_wrap(~`Student's Gender`, scales = "free") + scale_x_continuous(breaks = popular_words$row,
+    labels = popular_words$`Wishes (tokenized)`) + coord_flip()
 ```
 
 ![](Lab2b-Submission-EDA-Qual-Markdown_files/figure-gfm/Your%2037%20Code%20Chunk-1.png)<!-- -->
@@ -1710,20 +1821,17 @@ popular_words %>%
 
 ``` r
 evaluation_wishes_filtered %>%
-  select(`Class Group`, `Student's Gender`,
-         `Average Course Evaluation Rating`, `Wishes (tokenized)`) %>%
-  filter(`Class Group` == "A") %>%
-  count(`Wishes (tokenized)`, sort = TRUE) %>%
-  top_n(9) %>%
-  mutate(`Wishes (tokenized)` = reorder(`Wishes (tokenized)`, n)) %>%
-  ggplot() +
-  geom_col(aes(`Wishes (tokenized)`, n), fill = blue_grey_colours_1) +
-  blue_grey_theme() +
-  xlab("Word in Course Evaluation") +
-  ylab("Number of Times Used (Term Frequency)") +
-  ggtitle("Most Frequently Used Words in Course Evaluation Wishes for Group A
+    select(`Class Group`, `Student's Gender`, `Average Course Evaluation Rating`,
+        `Wishes (tokenized)`) %>%
+    filter(`Class Group` == "A") %>%
+    count(`Wishes (tokenized)`, sort = TRUE) %>%
+    top_n(9) %>%
+    mutate(`Wishes (tokenized)` = reorder(`Wishes (tokenized)`, n)) %>%
+    ggplot() + geom_col(aes(`Wishes (tokenized)`, n), fill = blue_grey_colours_1) +
+    blue_grey_theme() + xlab("Word in Course Evaluation") + ylab("Number of Times Used (Term Frequency)") +
+    ggtitle("Most Frequently Used Words in Course Evaluation Wishes for Group A
           Students") +
-  coord_flip()
+    coord_flip()
 ```
 
     ## Selecting by n
@@ -1734,20 +1842,17 @@ evaluation_wishes_filtered %>%
 
 ``` r
 evaluation_wishes_filtered %>%
-  select(`Class Group`, `Student's Gender`,
-         `Average Course Evaluation Rating`, `Wishes (tokenized)`) %>%
-  filter(`Class Group` == "B") %>%
-  count(`Wishes (tokenized)`, sort = TRUE) %>%
-  top_n(9) %>%
-  mutate(`Wishes (tokenized)` = reorder(`Wishes (tokenized)`, n)) %>%
-  ggplot() +
-  geom_col(aes(`Wishes (tokenized)`, n), fill = blue_grey_colours_1) +
-  blue_grey_theme() +
-  xlab("Word in Course Evaluation") +
-  ylab("Number of Times Used (Term Frequency)") +
-  ggtitle("Most Frequently Used Words in Course Evaluation Wishes for Group B
+    select(`Class Group`, `Student's Gender`, `Average Course Evaluation Rating`,
+        `Wishes (tokenized)`) %>%
+    filter(`Class Group` == "B") %>%
+    count(`Wishes (tokenized)`, sort = TRUE) %>%
+    top_n(9) %>%
+    mutate(`Wishes (tokenized)` = reorder(`Wishes (tokenized)`, n)) %>%
+    ggplot() + geom_col(aes(`Wishes (tokenized)`, n), fill = blue_grey_colours_1) +
+    blue_grey_theme() + xlab("Word in Course Evaluation") + ylab("Number of Times Used (Term Frequency)") +
+    ggtitle("Most Frequently Used Words in Course Evaluation Wishes for Group B
           Students") +
-  coord_flip()
+    coord_flip()
 ```
 
     ## Selecting by n
@@ -1758,20 +1863,17 @@ evaluation_wishes_filtered %>%
 
 ``` r
 evaluation_wishes_filtered %>%
-  select(`Class Group`, `Student's Gender`,
-         `Average Course Evaluation Rating`, `Wishes (tokenized)`) %>%
-  filter(`Class Group` == "C") %>%
-  count(`Wishes (tokenized)`, sort = TRUE) %>%
-  top_n(9) %>%
-  mutate(`Wishes (tokenized)` = reorder(`Wishes (tokenized)`, n)) %>%
-  ggplot() +
-  geom_col(aes(`Wishes (tokenized)`, n), fill = blue_grey_colours_1) +
-  blue_grey_theme() +
-  xlab("Word in Course Evaluation") +
-  ylab("Number of Times Used (Term Frequency)") +
-  ggtitle("Most Frequently Used Words in Course Evaluation Wishes for Group C
+    select(`Class Group`, `Student's Gender`, `Average Course Evaluation Rating`,
+        `Wishes (tokenized)`) %>%
+    filter(`Class Group` == "C") %>%
+    count(`Wishes (tokenized)`, sort = TRUE) %>%
+    top_n(9) %>%
+    mutate(`Wishes (tokenized)` = reorder(`Wishes (tokenized)`, n)) %>%
+    ggplot() + geom_col(aes(`Wishes (tokenized)`, n), fill = blue_grey_colours_1) +
+    blue_grey_theme() + xlab("Word in Course Evaluation") + ylab("Number of Times Used (Term Frequency)") +
+    ggtitle("Most Frequently Used Words in Course Evaluation Wishes for Group C
           Students") +
-  coord_flip()
+    coord_flip()
 ```
 
     ## Selecting by n
@@ -1789,10 +1891,7 @@ evaluation_likes_filtered_cloud <- evaluation_likes_filtered %>% # nolint
 wordcloud2(evaluation_likes_filtered_cloud, size = .5)
 ```
 
-    ## PhantomJS not found. You can install it with webshot::install_phantomjs(). If it is installed, please make sure the phantomjs executable can be found via the PATH variable.
-
-<div class="wordcloud2 html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-6bd38b85a467b8bc19cb" style="width:576px;height:384px;"></div>
-<script type="application/json" data-for="htmlwidget-6bd38b85a467b8bc19cb">{"x":{"word":["understand","lecture","explain","concept","note","teach","lab","content","topic","easy","it","learn","class","practical","quizzes","tail","interact","busy","livery","question","student","develop","help","helpful","make","manner","manual","method","read","understood","deliver","engage","enjoy","real","slide","world","answer","apply","aspect","broad","comprehensive","concerns","data","depth","encourage","ensure","example","explanation","focus","guide","hand","integrate","knowledge","lesson","material","mode","outline","project","provide","quiz","relevant","source","start","taught","time","2the","accommodate","activities","actual","advance","ahead","algorithm","amount","analogy","arrange","assess","assign","assignment","assist","assistance","benefit","business","calendar","career","carry","cat","check","chronological","churn","come","communicate","complex","confirm","constant","convey","cover","create","custom","deep","description","efficient","enhance","entry","environment","excellent","excite","expand","expect","extra","extreme","fascinate","feedback","fine","fluent","follow","form","gauge","google","gradual","handle","hard","high","hon","include","indulge","information","informative","insight","intelligence","intuit","label","lend","market","meet","move","multiple","nice","online","opportunity","organization","organize","pa","pace","participate","passionate","people","perceive","planning","posit","practicality","prediction","prepare","prior","punctuality","purpose","quick","recording","reference","relate","respond","response","revision","rush","save","scenario","scope","sectioned","session","set","simple","slab","solve","spreadsheet","structure","systematic","take","talk","technological","test","theory","tie","valid","verse","video","vise","well2","wise","written"],"freq":[26,25,16,15,14,14,13,11,11,10,10,10,8,7,7,7,6,5,5,5,5,4,4,4,4,4,4,4,4,4,3,3,3,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0,"weightFactor":3.461538461538462,"backgroundColor":"white","gridSize":0,"minRotation":-0.7853981633974483,"maxRotation":0.7853981633974483,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":{"render":[{"code":"function(el,x){\n                        console.log(123);\n                        if(!iii){\n                          window.location.reload();\n                          iii = False;\n\n                        }\n  }","data":null}]}}</script>
+![](Lab2b-Submission-EDA-Qual-Markdown_files/figure-gfm/Your%2041%20Code%20Chunk-1.png)<!-- -->
 
 ## Evaluation Wishes
 
@@ -1803,8 +1902,7 @@ evaluation_wishes_filtered_cloud <- evaluation_wishes_filtered %>% # nolint
 wordcloud2(evaluation_wishes_filtered_cloud, size = .5)
 ```
 
-<div class="wordcloud2 html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-cd9c7b75cbfef30320c5" style="width:576px;height:384px;"></div>
-<script type="application/json" data-for="htmlwidget-cd9c7b75cbfef30320c5">{"x":{"word":["slides","concepts","class","quizzes","labs","learning","lecturer","notes","physical","recommend","understanding","cats","classes","explanation","recommendation","teaching","understand","videos","assignments","complex","content","enjoying","explain","improve","interactive","lecture","louder","motivation","online","practical","quiz","read","recommendations","reduce","review","short","speak","stuck","students","unit","watch","a lot","activities","algorithm","allowed","amount","applied","assess","assistance","audibly","based","choices","clarification","colors","comment","compete","complaints","complete","concept","coursework","cover","cumbersome","decide","delivered","develop","diagrams","difficult","discouraged","discouraging","discussions","easier","efficient","elaboration","emphasis","encourage","engagement","engaging","enhance","evaluation","exam","examples","experience","extremely","fast","fewer","fine","flexibility","flows","flying","follow","formed","giving","hard","illustrations","include","incorporate","increased","involvement","kindly","lengthy","lessons","limit","lively","makes","manageable","manuals","material","materials","mentally","mode","models","moment","multiple","netflix","nice","operations","optimum","papers","pass","people","perfect","perfection","performing","physically","practice","precise","previous","price","process","project","provide","python","questions","reading","recall","recommendable otherwise","remember","revision","satisfied","scary","scored","semester","separate","sessions","shorter","simpler","slide","sliders","specifically","start","step","strict","student","submissions","subtopics","summarized","supplementary","task","terms","theory","time","tiresome","topics","tricky","variation","vocal","voice","week","worded","wordy","writing","you tube"],"freq":[10,8,6,6,5,5,5,4,4,4,4,3,3,3,3,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0,"weightFactor":9,"backgroundColor":"white","gridSize":0,"minRotation":-0.7853981633974483,"maxRotation":0.7853981633974483,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":{"render":[{"code":"function(el,x){\n                        console.log(123);\n                        if(!iii){\n                          window.location.reload();\n                          iii = False;\n\n                        }\n  }","data":null}]}}</script>
+![](Lab2b-Submission-EDA-Qual-Markdown_files/figure-gfm/Your%2042%20Code%20Chunk-1.png)<!-- -->
 
 **etc.** as per the lab submission requirements. Be neat and communicate
 in a clear and logical manner.
